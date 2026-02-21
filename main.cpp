@@ -152,11 +152,30 @@ bool isAllLetters(const std::string &input) {
     return std::all_of(input.begin(), input.end(), ::isalpha);
 }
 
+void updateGalutinis(studentasNode* head) {
+    studentasNode* current = head;
+    while (current != nullptr) {
+        current->data.galutinis = calculateGalutinis(current->data);
+        current = current->next;
+    }
+}
+
+double calculateGalutinis(const studentas &s) {
+    double namuDarbaiVidurkis{0.0};
+    if (!s.namuDarbai.empty()) {
+        namuDarbaiVidurkis = std::accumulate(s.namuDarbai.begin(), s.namuDarbai.end(), 0.0) / s.namuDarbai.size();
+    }
+    return 0.4 * namuDarbaiVidurkis + 0.6 * s.egzaminas;
+}
+
 int main()
 {
     setlocale(LC_ALL, "Lithuanian");
     printWelcome();
     printNameAsk();
     studentasNode* studentai = enterStudentai();
+    updateGalutinis(studentai);
+
+    
     return 0;
 }
