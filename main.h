@@ -19,4 +19,9 @@ struct studentas
     int galutinis {};
 };
 
+struct studentasNode {
+    studentas data;
+    studentasNode* next;
+};
+
 #endif
