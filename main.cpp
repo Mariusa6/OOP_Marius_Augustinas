@@ -1,5 +1,34 @@
 #include "main.h"
 
+void printWelcome();
+void printNameAsk();
+studentasNode* enterStudentai();
+studentas enterStudentas(int n);
+std::string enterName(int n);
+std::string enterSurname(int n);
+int enterNumberOfPazymys(int n);
+std::vector<int> enterPazymiai(int n, int m);
+int enterEgzaminas(int n);
+bool isAllLetters(const std::string &input);
+double calculateGalutinis(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);
+void updateGalutinis(studentasNode* head, double namuDarbaiSvertis, double egzaminasSvertis);
+void printStudentai(studentasNode* head);
+
+int main()
+{
+    double namuDarbaiSvertis{0.4};
+    double egzaminasSvertis{0.6};
+    SetConsoleOutputCP(65001);
+    SetConsoleCP(65001);
+    printWelcome();
+    printNameAsk();
+    studentasNode* studentai = enterStudentai();
+    updateGalutinis(studentai, namuDarbaiSvertis, egzaminasSvertis);
+    printStudentai(studentai);
+    
+    return 0;
+}
+
 void printWelcome()
 {
     std::cout << "\n------------------------------\n";
@@ -54,7 +83,7 @@ studentas enterStudentas(int n)
     ivedamas.vardas = enterName(n);
     ivedamas.pavarde = enterSurname(n);
     ivedamas.namuDarbai = enterPazymiai(n, enterNumberOfPazymys(n));
-    ivedamas.galutinis = enterEgzaminas(n);
+    ivedamas.egzaminas = enterEgzaminas(n);
     return ivedamas;
 }
 
@@ -168,16 +197,18 @@ double calculateGalutinis(const studentas &s, double namuDarbaiSvertis, double e
     return namuDarbaiSvertis * namuDarbaiVidurkis + egzaminasSvertis * s.egzaminas;
 }
 
-int main()
+void printStudentai(studentasNode* head)
 {
-    double namuDarbaiSvertis{0.4};
-    double egzaminasSvertis{0.6};
-    setlocale(LC_ALL, "Lithuanian");
-    printWelcome();
-    printNameAsk();
-    studentasNode* studentai = enterStudentai();
-    updateGalutinis(studentai, namuDarbaiSvertis, egzaminasSvertis);
-
-    
-    return 0;
+    studentasNode* current = head;
+    std::cout << std::left << std::setw(15) << "Vardas"
+        << std::left << std::setw(15) << "Pavarde"
+        << std::left << std::setw(20) << "Galutinis (Vid.)" << "\n";
+    std::cout << "---------------------------------------------\n";
+    while (current != nullptr)
+    {
+        std::cout << std::left << std::setw(15) << current->data.vardas
+            << std::left << std::setw(15) << current->data.pavarde
+            << std::left << std::setw(20) << std::fixed << std::setprecision(2) << current->data.galutinis << "\n";
+        current = current->next;
+    }
 }

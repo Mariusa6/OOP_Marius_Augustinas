@@ -1,5 +1,5 @@
-#ifndef MAIN.H
-#define MAIN.H
+#ifndef MAIN_H
+#define MAIN_H
 
 #include <iostream>     // cout, cin
 #include <string>       // string
@@ -10,6 +10,8 @@
 #include <algorithm>    // all_of
 #include <cctype>       // isalpha
 #include <numeric>      // accumulate
+#include <iomanip>      // setprecision, setw
+#include <windows.h>    // SetConsoleOutputCP, SetConsoleCP
 
 struct studentas 
 {
