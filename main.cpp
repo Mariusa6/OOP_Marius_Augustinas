@@ -10,9 +10,11 @@ int enterNumberOfPazymys(int n);
 std::vector<int> enterPazymiai(int n, int m);
 int enterEgzaminas(int n);
 bool isAllLetters(const std::string &input);
-double calculateGalutinis(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);
-void updateGalutinis(studentasNode* head, double namuDarbaiSvertis, double egzaminasSvertis);
-void printStudentai(studentasNode* head);
+char askAverageOrMedian();
+void calculateGalutinis(char choice, studentasNode* head, double namuDarbaiSvertis, double egzaminasSvertis);
+double calculateGalutinisMedian(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);
+double calculateGalutinisAverage(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);
+void printStudentai(studentasNode* head, char choice);
 
 int main()
 {
@@ -23,8 +25,9 @@ int main()
     printWelcome();
     printNameAsk();
     studentasNode* studentai = enterStudentai();
-    updateGalutinis(studentai, namuDarbaiSvertis, egzaminasSvertis);
-    printStudentai(studentai);
+    char choice = askAverageOrMedian();
+    calculateGalutinis(choice, studentai, namuDarbaiSvertis, egzaminasSvertis);
+    printStudentai(studentai, choice);
     
     return 0;
 }
@@ -181,28 +184,61 @@ bool isAllLetters(const std::string &input) {
     return std::all_of(input.begin(), input.end(), ::isalpha);
 }
 
-void updateGalutinis(studentasNode* head, double namuDarbaiSvertis, double egzaminasSvertis) {
+char askAverageOrMedian()
+{
+    char choice;
+    std::cout << "Ar norite naudoti vidurkį (v) ar medianą (m) galutiniam įvertinimui apskaičiuoti? (v/m): ";
+    do
+    {
+        std::cin >> choice;
+        choice = tolower(choice);
+        if (choice != 'v' && choice != 'm')
+            std::cout << "Netinkama įvestis, bandykite 'v' arba 'm': ";
+    } while (choice != 'v' && choice != 'm');
+    return choice;
+}
+
+void calculateGalutinis(char choice, studentasNode* head, double namuDarbaiSvertis, double egzaminasSvertis)
+{
     studentasNode* current = head;
-    while (current != nullptr) {
-        current->data.galutinis = calculateGalutinis(current->data, namuDarbaiSvertis, egzaminasSvertis);
+    while (current != nullptr)
+    {
+        if (choice == 'v')
+            current->data.galutinis = calculateGalutinisAverage(current->data, namuDarbaiSvertis, egzaminasSvertis);
+        else
+            current->data.galutinis = calculateGalutinisMedian(current->data, namuDarbaiSvertis, egzaminasSvertis);
         current = current->next;
     }
 }
 
-double calculateGalutinis(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis) {
+double calculateGalutinisAverage(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis) {
     double namuDarbaiVidurkis{0.0};
-    if (!s.namuDarbai.empty()) {
+    if (!s.namuDarbai.empty())
+    {
         namuDarbaiVidurkis = std::accumulate(s.namuDarbai.begin(), s.namuDarbai.end(), 0.0) / s.namuDarbai.size();
     }
     return namuDarbaiSvertis * namuDarbaiVidurkis + egzaminasSvertis * s.egzaminas;
 }
 
-void printStudentai(studentasNode* head)
+double calculateGalutinisMedian(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis)
+{
+    double namuDarbaiMediana{0.0};
+    if (!s.namuDarbai.empty())
+    {
+        std::vector<int> sortedNamaiDarbai = s.namuDarbai;
+        std::sort(sortedNamaiDarbai.begin(), sortedNamaiDarbai.end());
+        size_t mid {sortedNamaiDarbai.size() / 2};
+        namuDarbaiMediana = (sortedNamaiDarbai.size() % 2 == 0) ? (sortedNamaiDarbai[mid - 1] + sortedNamaiDarbai[mid]) / 2.0 : sortedNamaiDarbai[mid];
+    }
+    return namuDarbaiSvertis * namuDarbaiMediana + egzaminasSvertis * s.egzaminas;
+}
+
+void printStudentai(studentasNode* head, char choice)
 {
     studentasNode* current = head;
     std::cout << std::left << std::setw(15) << "Vardas"
         << std::left << std::setw(15) << "Pavarde"
-        << std::left << std::setw(20) << "Galutinis (Vid.)" << "\n";
+        << std::left << std::setw(11) << "Galutinis (" << (choice == 'v' ? "Vid.)" : "Med.)") << "\n";
     std::cout << "---------------------------------------------\n";
     while (current != nullptr)
     {

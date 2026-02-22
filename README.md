@@ -1,10 +1,9 @@
 # Studentų Informacinė Sistema OOP_Marius_Augustinas
-
 VU ISI Objektinio programavimo kurso laboratoriniai darbai
+
 v.pradinė - C++ programa, skirta studentų informacijos įvedimui, saugojimui ir galutinio pažymio skaičiavimui.
 
 ## Failų struktūra
-
 ```
 .
 ├── main.h       # Antraštės failas: bibliotekos, struktūros
@@ -46,18 +45,23 @@ Kviečia šias pagalbines funkcijas:
 - `enterPazymiai(n, m)` — įveda kiekvieno namų darbo pažymį (1–10)
 - `enterEgzaminas(n)` — įveda egzamino pažymį (1–10)
 
-### 4. Galutinio pažymio skaičiavimas — `updateGalutinis()` / `calculateGalutinis()`
+### 4. Metodo pasirinkimas — `askAverageOrMedian()`
+Prieš skaičiuojant galutinius pažymius, programa paklausia vartotojo, kokį metodą naudoti namų darbų rezultatams agreguoti:
+- `v` — **vidurkis** (aritmetinis namų darbų pažymių vidurkis)
+- `m` — **mediana** (vidurinė reikšmė surikiuotame pažymių sąraše)
+
+### 5. Galutinio pažymio skaičiavimas — `calculateGalutinis()`
 Galutinis pažymys skaičiuojamas pagal formulę:
-
 ```
-galutinis = 0.4 * namų_darbų_vidurkis + 0.6 * egzamino_pažymys
+galutinis = 0.4 × namų_darbų_vidurkis_arba_mediana + 0.6 × egzamino_pažymys
 ```
+- `calculateGalutinisAverage()` — skaičiuoja naudojant **vidurkį**
+- `calculateGalutinisMedian()` — skaičiuoja naudojant **medianą**
 
-`updateGalutinis()` eina per visą sąrašą ir kiekvienam studentui iškviečia `calculateGalutinis()`.
+`calculateGalutinis()` eina per visą sąrašą ir kiekvienam studentui iškviečia atitinkamą funkciją pagal vartotojo pasirinkimą.
 
-### 5. Rezultatų išvedimas — `printStudentai()`
-Išveda studentų sąrašą lentelės formatu:
-
+### 6. Rezultatų išvedimas — `printStudentai()`
+Išveda studentų sąrašą lentelės formatu (stulpelyje nurodoma, ar naudotas vidurkis ar mediana):
 ```
 Vardas          Pavarde         Galutinis (Vid.)
 ---------------------------------------------
@@ -66,17 +70,14 @@ Petras          Petraitis       8.60
 ```
 
 ## Įvesties validacija
-
 Visos įvesties funkcijos tikrina duomenis ir prašo įvesti iš naujo, jei:
 - Vardas / pavardė turi ne raides (`isAllLetters`)
 - Pažymys ne tarp 1 ir 10
 - Namų darbų skaičius neigiamas
-- Pasirinkimas `t/n` yra netinkamas simbolis
+- Pasirinkimas `t/n` arba `v/m` yra netinkamas simbolis
 
 ## Atminties valdymas
-
 Programa naudoja dinaminę atmintį (`new`) susietajam sąrašui. Baigus naudoti sąrašą, atmintį reikia atlaisvinti:
-
 ```cpp
 studentasNode* current = studentai;
 while (current != nullptr) {
@@ -87,9 +88,8 @@ while (current != nullptr) {
 ```
 
 ## Kompiliavimas
-
 ```bash
-g++ main.cpp -o programa
+g++ -std=c++17 main.cpp -o programa
 ./programa
 ```
 
