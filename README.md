@@ -21,7 +21,7 @@ Saugo vieno studento informaciją:
 - `galutinis` — apskaičiuotas galutinis pažymys
 
 ### `studentasNode`
-Susietojo sąrašo mazgas, saugantis `studentas` ir rodyklę į kitą mazgą (`next`).
+Vienpusio sąrašo mazgas, saugantis `studentas` ir rodyklę į kitą mazgą (`next`).
 
 ## Programos veikimas
 
@@ -32,7 +32,7 @@ Programa pradedama `main()` funkcijoje:
 - Kviečiamos pagrindinės funkcijos
 
 ### 2. Studentų įvedimas — `enterStudentai()`
-- Kuria susietąjį sąrašą (`linked list`) studentų saugojimui
+- Kuria vienpusį sąrašą (`linked list`) studentų saugojimui
 - Kiekvienam studentui kviečia `enterStudentas(n)`
 - Po kiekvieno studento klausia, ar norima pridėti dar vieną (`t/n`)
 - Grąžina rodyklę į sąrašo pradžią (`head`)
