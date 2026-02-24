@@ -14,6 +14,22 @@ studentas* generateStudentaiArray(int n)
     return studentai;
 }
 
+std::vector<studentas> generateStudentaiVector(int n)
+{
+    std::vector<studentas> studentai;
+    for (int i = 0; i < n; i++)
+    {
+        studentas s;
+        s.vardas = generateStudentName();
+        s.pavarde = generateStudentSurname();
+        int m = generateNumberOfPazymys();
+        s.namuDarbai = generatePazymiai(m);
+        s.egzaminas = generatePazymys();
+        studentai.push_back(s);
+    }
+    return studentai;
+}
+
 std::string generateStudentName()
 {
     return lithuanianNames[std::mt19937{std::random_device{}()}() % lithuanianNames.size()];
