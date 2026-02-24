@@ -1,20 +1,6 @@
 #include "main.h"
 
-studentas* generateStudentaiArray(int n)
-{
-    studentas* studentai = new studentas[n];
-    for (int i = 0; i < n; i++)
-    {
-        studentai[i].vardas = generateStudentName();
-        studentai[i].pavarde = generateStudentSurname();
-        int m = generateNumberOfPazymys();
-        studentai[i].namuDarbai = generatePazymiai(m);
-        studentai[i].egzaminas = generatePazymys();
-    }
-    return studentai;
-}
-
-std::vector<studentas> generateStudentaiVector(int n)
+std::vector<studentas> generateStudentai(int n)
 {
     std::vector<studentas> studentai;
     for (int i = 0; i < n; i++)
@@ -22,6 +8,22 @@ std::vector<studentas> generateStudentaiVector(int n)
         studentas s;
         s.vardas = generateStudentName();
         s.pavarde = generateStudentSurname();
+        int m = generateNumberOfPazymys();
+        s.namuDarbai = generatePazymiai(m);
+        s.egzaminas = generatePazymys();
+        studentai.push_back(s);
+    }
+    return studentai;
+}
+
+std::vector<studentas> generateOnlyPazymiai(int n)
+{
+    std::vector<studentas> studentai;
+    for (int i = 0; i < n; i++)
+    {
+        studentas s;
+        s.vardas = enterName(i + 1);
+        s.pavarde = enterSurname(i + 1);
         int m = generateNumberOfPazymys();
         s.namuDarbai = generatePazymiai(m);
         s.egzaminas = generatePazymys();

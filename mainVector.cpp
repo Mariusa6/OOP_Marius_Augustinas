@@ -2,17 +2,39 @@
 
 int main()
 {
-    double namuDarbaiSvertis{0.4};
-    double egzaminasSvertis{0.6};
     SetConsoleOutputCP(65001);
     SetConsoleCP(65001);
     printWelcome();
-    printNameAsk();
-    int n;
-    std::vector<studentas> studentai = enterStudentaiVector();
-    char choice = askAverageOrMedian();
-    calculateGalutinisVector(choice, studentai, namuDarbaiSvertis, egzaminasSvertis);
-    printStudentaiVector(studentai, choice);
+    int n {};
+    char choice {};
+    char avgOrMedian {};
+    std::vector<studentas> studentaiVector {};
+    choice = askMenuChoice();
+    switch (choice)
+    {
+        case '1':
+            studentaiVector = enterStudentaiVector();
+            avgOrMedian = askAverageOrMedian();
+            calculateGalutinisVector(avgOrMedian, studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
+            printStudentaiVector(studentaiVector, avgOrMedian);
+        case '2':
+            n = enterNumberOfStudents();
+            studentaiVector = generateOnlyPazymiai(n);
+            avgOrMedian = askAverageOrMedian();
+            calculateGalutinisVector(avgOrMedian, studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
+            printStudentaiVector(studentaiVector, avgOrMedian);
+            break;
+        case '3':
+            n = enterNumberOfStudents();
+            studentaiVector = generateStudentai(n);
+            avgOrMedian = askAverageOrMedian();
+            calculateGalutinisVector(avgOrMedian, studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
+            printStudentaiVector(studentaiVector, avgOrMedian);
+            break;
+        case '4':
+            std::cout << "Programa baigta.\n";
+            break;
+    }
     return 0;
 }
 
@@ -196,14 +218,28 @@ double calculateGalutinisMedian(const studentas &s, double namuDarbaiSvertis, do
 
 void printStudentaiVector(const std::vector<studentas> &studentai, char choice)
 {
-    std::cout << std::left << std::setw(15) << "Vardas"
-        << std::left << std::setw(15) << "Pavardė"
+    std::cout << std::left << std::setw(20) << "Vardas"
+        << std::left << std::setw(20) << "Pavardė"
         << std::left << std::setw(11) << "Galutinis (" << (choice == 'v' ? "Vid.)" : "Med.)") << "\n";
     std::cout << "---------------------------------------------\n";
     for(int i = 0; i < studentai.size(); i++)
     {
-        std::cout << std::left << std::setw(15) << studentai[i].vardas
-            << std::left << std::setw(15) << studentai[i].pavarde
+        std::cout << std::left << std::setw(20) << studentai[i].vardas
+            << std::left << std::setw(20) << studentai[i].pavarde
             << std::left << std::setw(11) << std::fixed << std::setprecision(2) << studentai[i].galutinis << "\n";
     }
+}
+
+int enterNumberOfStudents()
+{
+    int n;
+    std::cout << "Įveskite studentų skaičių: ";
+    while (!(std::cin >> n) || n <= 0)
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Iveskite teigiamą skaičių.\n";
+        std::cout << "Įveskite studentų skaičių: ";
+    }
+    return n;
 }

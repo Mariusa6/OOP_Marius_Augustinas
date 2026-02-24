@@ -2,39 +2,44 @@
 
 int main()
 {
-    double namuDarbaiSvertis{0.4};
-    double egzaminasSvertis{0.6};
     SetConsoleOutputCP(65001);
     SetConsoleCP(65001);
     printWelcome();
-    printNameAsk();
-    int n{};
-    n = enterNumberOfStudents();
-    studentas* studentai = enterStudentaiArray(n);
-    char choice = askAverageOrMedian();
-    calculateGalutinisArray(choice, studentai, n, namuDarbaiSvertis, egzaminasSvertis);
-    printStudentaiArray(studentai, n, choice);
-    
-    delete[] studentai;
-    return 0;
-}
-
-char askMenuChoice()
-{
-    char choice;
-    std::cout << "Pasirikite veiksmą:\n";
-    std::cout << "1. Įvesti studentus ranka\n";
-    std::cout << "2. Generuoti tik pažymius\n";
-    std::cout << "3. Generuoti studentų vardus ir pažymius\n";
-    std::cout << "4. Baigti darbą\n";
-    std::cout << "Jūsų pasirinkimas: ";
-    do
+    int n {};
+    char choice {};
+    char avgOrMedian {};
+    studentas* studentai {};
+    std::vector<studentas> studentaiVector {};
+    choice = askMenuChoice();
+    switch (choice)
     {
-        std::cin >> choice;
-        if (choice < '1' || choice > '4')
-            std::cout << "Netinkama įvestis, bandykite dar kartą: ";
-    } while (choice < '1' || choice > '4');
-    return choice;
+        case '1':
+            n = enterNumberOfStudents();
+            studentai = enterStudentaiArray(n);
+            avgOrMedian = askAverageOrMedian();
+            calculateGalutinisArray(avgOrMedian, studentai, n, namuDarbaiSvertis, egzaminasSvertis);
+            printStudentaiArray(studentai, n, avgOrMedian);
+            delete[] studentai;
+            break;
+        case '2':
+            n = enterNumberOfStudents();
+            studentaiVector = generateOnlyPazymiai(n);
+            avgOrMedian = askAverageOrMedian();
+            calculateGalutinisVector(avgOrMedian, studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
+            printStudentaiVector(studentaiVector, avgOrMedian);
+            break;
+        case '3':
+            n = enterNumberOfStudents();
+            studentaiVector = generateStudentai(n);
+            avgOrMedian = askAverageOrMedian();
+            calculateGalutinisVector(avgOrMedian, studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
+            printStudentaiVector(studentaiVector, avgOrMedian);
+            break;
+        case '4':
+            std::cout << "Programa baigta.\n";
+            break;
+    }
+    return 0;
 }
 
 int enterNumberOfStudents()
@@ -51,13 +56,39 @@ int enterNumberOfStudents()
     return n;
 }
 
-studentas* enterStudentaiArray(int n) {
+studentas* enterStudentaiArray(int n)
+{
     studentas* studentai = new studentas[n];
     for (int i = 0; i < n; i++)
     {
         studentai[i] = enterStudentas(i + 1);
     }
     return studentai;
+}
+
+void calculateGalutinisArray(char choice, studentas* studentai, int n, double namuDarbaiSvertis, double egzaminasSvertis)
+{
+    for(int i = 0; i < n; i++)
+    {
+        if (choice == 'v')
+            studentai[i].galutinis = calculateGalutinisAverage(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
+        else
+            studentai[i].galutinis = calculateGalutinisMedian(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
+    }
+}
+
+void printStudentaiArray(studentas* studentai, int n, char choice)
+{
+    std::cout << std::left << std::setw(20) << "Vardas"
+        << std::left << std::setw(20) << "Pavardė"
+        << std::left << std::setw(11) << "Galutinis (" << (choice == 'v' ? "Vid.)" : "Med.)") << "\n";
+    std::cout << "---------------------------------------------\n";
+    for(int i = 0; i < n; i++)
+    {
+        std::cout << std::left << std::setw(20) << studentai[i].vardas
+            << std::left << std::setw(20) << studentai[i].pavarde
+            << std::left << std::setw(11) << std::fixed << std::setprecision(2) << studentai[i].galutinis << "\n";
+    }
 }
 
 studentas enterStudentas(int n)
@@ -179,17 +210,6 @@ char askAverageOrMedian()
     return choice;
 }
 
-void calculateGalutinisArray(char choice, studentas* studentai, int n, double namuDarbaiSvertis, double egzaminasSvertis)
-{
-    for(int i = 0; i < n; i++)
-    {
-        if (choice == 'v')
-            studentai[i].galutinis = calculateGalutinisAverage(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
-        else
-            studentai[i].galutinis = calculateGalutinisMedian(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
-    }
-}
-
 double calculateGalutinisAverage(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis) {
     double namuDarbaiVidurkis{0.0};
     if (!s.namuDarbai.empty())
@@ -212,16 +232,27 @@ double calculateGalutinisMedian(const studentas &s, double namuDarbaiSvertis, do
     return namuDarbaiSvertis * namuDarbaiMediana + egzaminasSvertis * s.egzaminas;
 }
 
-void printStudentaiArray(studentas* studentai, int n, char choice)
+void calculateGalutinisVector(char choice, std::vector<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis)
 {
-    std::cout << std::left << std::setw(15) << "Vardas"
-        << std::left << std::setw(15) << "Pavardė"
+    for(int i; i < studentai.size(); i++)
+    {
+        if (choice == 'v')
+            studentai[i].galutinis = calculateGalutinisAverage(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
+        else
+            studentai[i].galutinis = calculateGalutinisMedian(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
+    }
+}
+
+void printStudentaiVector(const std::vector<studentas> &studentai, char choice)
+{
+    std::cout << std::left << std::setw(20) << "Vardas"
+        << std::left << std::setw(20) << "Pavardė"
         << std::left << std::setw(11) << "Galutinis (" << (choice == 'v' ? "Vid.)" : "Med.)") << "\n";
     std::cout << "---------------------------------------------\n";
-    for(int i = 0; i < n; i++)
+    for(int i = 0; i < studentai.size(); i++)
     {
-        std::cout << std::left << std::setw(15) << studentai[i].vardas
-            << std::left << std::setw(15) << studentai[i].pavarde
+        std::cout << std::left << std::setw(20) << studentai[i].vardas
+            << std::left << std::setw(20) << studentai[i].pavarde
             << std::left << std::setw(11) << std::fixed << std::setprecision(2) << studentai[i].galutinis << "\n";
     }
 }

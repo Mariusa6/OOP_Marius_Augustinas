@@ -23,6 +23,9 @@ struct studentas
     double galutinis {};
 };
 
+const double namuDarbaiSvertis{0.4};
+const double egzaminasSvertis{0.6};
+
 const std::vector<std::string> lithuanianNames = {
   "Tomas", "Lukas", "Mantas", "Erikas", "Darius",
   "Mindaugas", "Vytautas", "Andrius", "Justas", "Rokas",
@@ -43,8 +46,8 @@ const std::vector<std::string> lithuanianSurnames = {
 char askMenuChoice();
 
 // Generate functions
-studentas* generateStudentaiArray(int n);
-std::vector<studentas> generateStudentaiVector(int n);
+std::vector<studentas> generateStudentai(int n);
+std::vector<studentas> generateOnlyPazymiai(int n);
 std::string generateStudentName();
 std::string generateStudentSurname();
 int generateNumberOfPazymys();
