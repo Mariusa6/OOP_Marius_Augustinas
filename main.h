@@ -39,8 +39,12 @@ const std::vector<std::string> lithuanianSurnames = {
 
 // Function declarations
 
+// Menu functions
+char askMenuChoice();
+
 // Generate functions
 studentas* generateStudentaiArray(int n);
+std::vector<studentas> generateStudentaiVector(int n);
 std::string generateStudentName();
 std::string generateStudentSurname();
 int generateNumberOfPazymys();
