@@ -1,0 +1,45 @@
+#include "main.h"
+
+studentas* generateStudentaiArray(int n)
+{
+    studentas* studentai = new studentas[n];
+    for (int i = 0; i < n; i++)
+    {
+        studentai[i].vardas = generateStudentName();
+        studentai[i].pavarde = generateStudentSurname();
+        int m = generateNumberOfPazymys();
+        studentai[i].namuDarbai = generatePazymiai(m);
+        studentai[i].egzaminas = generatePazymys();
+    }
+    return studentai;
+}
+
+std::string generateStudentName()
+{
+    return lithuanianNames[std::mt19937{std::random_device{}()}() % lithuanianNames.size()];
+}
+
+std::string generateStudentSurname()
+{
+    return lithuanianSurnames[std::mt19937{std::random_device{}()}() % lithuanianSurnames.size()];
+}
+
+int generateNumberOfPazymys()
+{
+    return std::mt19937{std::random_device{}()}() % 10 + 1;
+}
+
+std::vector<int> generatePazymiai(int m) // m - pažymių skaičius
+{
+    std::vector<int> tmp;
+    for(int i{0} ; i < m ; i++)
+    {
+        tmp.push_back(generatePazymys());
+    }
+    return tmp;
+}
+
+int generatePazymys()
+{
+    return std::mt19937{std::random_device{}()}() % 10 + 1;
+}

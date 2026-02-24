@@ -8,8 +8,9 @@ int main()
     SetConsoleCP(65001);
     printWelcome();
     printNameAsk();
-    int n;
-    studentas* studentai = enterStudentaiArray(&n);
+    int n{};
+    n = enterNumberOfStudents();
+    studentas* studentai = enterStudentaiArray(n);
     char choice = askAverageOrMedian();
     calculateGalutinisArray(choice, studentai, n, namuDarbaiSvertis, egzaminasSvertis);
     printStudentaiArray(studentai, n, choice);
@@ -18,9 +19,10 @@ int main()
     return 0;
 }
 
-studentas* enterStudentaiArray(int* nPtr) {
-    std::cout << "Įveskite studentų skaičių: ";
+int enterNumberOfStudents()
+{
     int n;
+    std::cout << "Įveskite studentų skaičių: ";
     while (!(std::cin >> n) || n <= 0)
     {
         std::cin.clear();
@@ -28,7 +30,10 @@ studentas* enterStudentaiArray(int* nPtr) {
         std::cout << "Iveskite teigiamą skaičių.\n";
         std::cout << "Įveskite studentų skaičių: ";
     }
-    *nPtr = n;
+    return n;
+}
+
+studentas* enterStudentaiArray(int n) {
     studentas* studentai = new studentas[n];
     for (int i = 0; i < n; i++)
     {
