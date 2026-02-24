@@ -27,4 +27,20 @@ struct studentasNode {
     studentasNode* next;
 };
 
+void printWelcome();
+void printNameAsk();
+studentas* enterStudentaiArray(int* nPtr);
+studentas enterStudentas(int n);
+std::string enterName(int n);
+std::string enterSurname(int n);
+int enterNumberOfPazymys(int n);
+std::vector<int> enterPazymiai(int n, int m);
+int enterEgzaminas(int n);
+bool isAllLetters(const std::string &input);
+char askAverageOrMedian();
+void calculateGalutinisArray(char choice, studentas* studentai, int n, double namuDarbaiSvertis, double egzaminasSvertis);
+double calculateGalutinisMedian(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);
+double calculateGalutinisAverage(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);
+void printStudentaiArray(studentas* studentai, int n, char choice);
+
 #endif

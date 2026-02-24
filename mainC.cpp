@@ -1,21 +1,5 @@
 #include "main.h"
 
-void printWelcome();
-void printNameAsk();
-studentasNode* enterStudentai();
-studentas enterStudentas(int n);
-std::string enterName(int n);
-std::string enterSurname(int n);
-int enterNumberOfPazymys(int n);
-std::vector<int> enterPazymiai(int n, int m);
-int enterEgzaminas(int n);
-bool isAllLetters(const std::string &input);
-char askAverageOrMedian();
-void calculateGalutinis(char choice, studentasNode* head, double namuDarbaiSvertis, double egzaminasSvertis);
-double calculateGalutinisMedian(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);
-double calculateGalutinisAverage(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);
-void printStudentai(studentasNode* head, char choice);
-
 int main()
 {
     double namuDarbaiSvertis{0.4};
@@ -24,59 +8,33 @@ int main()
     SetConsoleCP(65001);
     printWelcome();
     printNameAsk();
-    studentasNode* studentai = enterStudentai();
+    int n;
+    studentas* studentai = enterStudentaiArray(&n);
     char choice = askAverageOrMedian();
-    calculateGalutinis(choice, studentai, namuDarbaiSvertis, egzaminasSvertis);
-    printStudentai(studentai, choice);
+    calculateGalutinisArray(choice, studentai, n, namuDarbaiSvertis, egzaminasSvertis);
+    printStudentaiArray(studentai, n, choice);
     
+    delete[] studentai;
     return 0;
 }
 
-void printWelcome()
-{
-    std::cout << "\n------------------------------\n";
-    std::cout << " Studentų informacinė sistema \n";
-    std::cout << "------------------------------\n\n";
-}
-
-void printNameAsk()
-{
-    std::cout << "Įveskite naujus studentus.\n";
-}
-
-studentasNode* enterStudentai() {
-    studentasNode* head{nullptr};
-    studentasNode* tail{nullptr};
-    char choice;
-    int n{0};
-
-    do
+studentas* enterStudentaiArray(int* nPtr) {
+    std::cout << "Įveskite studentų skaičių: ";
+    int n;
+    while (!(std::cin >> n) || n <= 0)
     {
-        n++;
-        studentasNode* newNode = new studentasNode();
-        newNode->data = enterStudentas(n);
-        newNode->next = nullptr;
-
-        if (head == nullptr)
-            head = tail = newNode;
-        else
-        {
-            tail->next = newNode;
-            tail = newNode;
-        }
-
-        std::cout << "Ar norite pridėti dar vieną studentą? (t/n): ";
-        do
-        {
-            std::cin >> choice;
-            choice = tolower(choice);
-            if (choice != 't' && choice != 'n')
-                std::cout << "Netinkama įvestis, bandykite 't' arba 'n': ";
-        } while (choice != 't' && choice != 'n');
-
-    } while (choice == 't');
-
-    return head;
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Iveskite teigiamą skaičių.\n";
+        std::cout << "Įveskite studentų skaičių: ";
+    }
+    *nPtr = n;
+    studentas* studentai = new studentas[n];
+    for (int i = 0; i < n; i++)
+    {
+        studentai[i] = enterStudentas(i + 1);
+    }
+    return studentai;
 }
 
 studentas enterStudentas(int n)
@@ -198,16 +156,14 @@ char askAverageOrMedian()
     return choice;
 }
 
-void calculateGalutinis(char choice, studentasNode* head, double namuDarbaiSvertis, double egzaminasSvertis)
+void calculateGalutinisArray(char choice, studentas* studentai, int n, double namuDarbaiSvertis, double egzaminasSvertis)
 {
-    studentasNode* current = head;
-    while (current != nullptr)
+    for(int i = 0; i < n; i++)
     {
         if (choice == 'v')
-            current->data.galutinis = calculateGalutinisAverage(current->data, namuDarbaiSvertis, egzaminasSvertis);
+            studentai[i].galutinis = calculateGalutinisAverage(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
         else
-            current->data.galutinis = calculateGalutinisMedian(current->data, namuDarbaiSvertis, egzaminasSvertis);
-        current = current->next;
+            studentai[i].galutinis = calculateGalutinisMedian(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
     }
 }
 
@@ -233,18 +189,16 @@ double calculateGalutinisMedian(const studentas &s, double namuDarbaiSvertis, do
     return namuDarbaiSvertis * namuDarbaiMediana + egzaminasSvertis * s.egzaminas;
 }
 
-void printStudentai(studentasNode* head, char choice)
+void printStudentaiArray(studentas* studentai, int n, char choice)
 {
-    studentasNode* current = head;
     std::cout << std::left << std::setw(15) << "Vardas"
-        << std::left << std::setw(15) << "Pavarde"
+        << std::left << std::setw(15) << "Pavardė"
         << std::left << std::setw(11) << "Galutinis (" << (choice == 'v' ? "Vid.)" : "Med.)") << "\n";
     std::cout << "---------------------------------------------\n";
-    while (current != nullptr)
+    for(int i = 0; i < n; i++)
     {
-        std::cout << std::left << std::setw(15) << current->data.vardas
-            << std::left << std::setw(15) << current->data.pavarde
-            << std::left << std::setw(20) << std::fixed << std::setprecision(2) << current->data.galutinis << "\n";
-        current = current->next;
+        std::cout << std::left << std::setw(15) << studentai[i].vardas
+            << std::left << std::setw(15) << studentai[i].pavarde
+            << std::left << std::setw(11) << std::fixed << std::setprecision(2) << studentai[i].galutinis << "\n";
     }
 }
