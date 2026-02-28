@@ -22,17 +22,19 @@ int main()
             break;
         case '2':
             n = enterNumberOfStudents();
-            studentaiVector = generateOnlyPazymiai(n);
+            studentai = generateOnlyPazymiaiArray(n);
             avgOrMedian = askAverageOrMedian();
-            calculateGalutinisVector(avgOrMedian, studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
-            printStudentaiVector(studentaiVector, avgOrMedian);
+            calculateGalutinisArray(avgOrMedian, studentai, n, namuDarbaiSvertis, egzaminasSvertis);
+            printStudentaiArray(studentai, n, avgOrMedian);
+            delete[] studentai;
             break;
         case '3':
             n = enterNumberOfStudents();
-            studentaiVector = generateStudentai(n);
+            studentai = generateStudentaiArray(n);
             avgOrMedian = askAverageOrMedian();
-            calculateGalutinisVector(avgOrMedian, studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
-            printStudentaiVector(studentaiVector, avgOrMedian);
+            calculateGalutinisArray(avgOrMedian, studentai, n, namuDarbaiSvertis, egzaminasSvertis);
+            printStudentaiArray(studentai, n, avgOrMedian);
+            delete[] studentai;
             break;
         case '4':
             std::cout << "Programa baigta.\n";
@@ -97,9 +99,9 @@ void calculateGalutinisArray(char choice, studentas* studentai, int n, double na
     for(int i = 0; i < n; i++)
     {
         if (choice == 'v')
-            studentai[i].galutinis = calculateGalutinisAverage(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
+            studentai[i].galutinisVid = calculateGalutinisAverage(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
         else
-            studentai[i].galutinis = calculateGalutinisMedian(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
+            studentai[i].galutinisMed = calculateGalutinisMedian(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
     }
 }
 
@@ -113,7 +115,7 @@ void printStudentaiArray(studentas* studentai, int n, char choice)
     {
         std::cout << std::left << std::setw(20) << studentai[i].vardas
             << std::left << std::setw(20) << studentai[i].pavarde
-            << std::left << std::setw(11) << std::fixed << std::setprecision(2) << studentai[i].galutinis << "\n";
+            << std::left << std::setw(11) << std::fixed << std::setprecision(2) << (choice == 'v' ? studentai[i].galutinisVid : studentai[i].galutinisMed) << "\n";
     }
 }
 
@@ -256,31 +258,6 @@ double calculateGalutinisMedian(const studentas &s, double namuDarbaiSvertis, do
         namuDarbaiMediana = (sortedNamaiDarbai.size() % 2 == 0) ? (sortedNamaiDarbai[mid - 1] + sortedNamaiDarbai[mid]) / 2.0 : sortedNamaiDarbai[mid];
     }
     return namuDarbaiSvertis * namuDarbaiMediana + egzaminasSvertis * s.egzaminas;
-}
-
-void calculateGalutinisVector(char choice, std::vector<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis)
-{
-    for(int i; i < studentai.size(); i++)
-    {
-        if (choice == 'v')
-            studentai[i].galutinis = calculateGalutinisAverage(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
-        else
-            studentai[i].galutinis = calculateGalutinisMedian(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
-    }
-}
-
-void printStudentaiVector(const std::vector<studentas> &studentai, char choice)
-{
-    std::cout << std::left << std::setw(20) << "Vardas"
-        << std::left << std::setw(20) << "Pavardė"
-        << std::left << std::setw(11) << "Galutinis (" << (choice == 'v' ? "Vid.)" : "Med.)") << "\n";
-    std::cout << "---------------------------------------------\n";
-    for(int i = 0; i < studentai.size(); i++)
-    {
-        std::cout << std::left << std::setw(20) << studentai[i].vardas
-            << std::left << std::setw(20) << studentai[i].pavarde
-            << std::left << std::setw(11) << std::fixed << std::setprecision(2) << studentai[i].galutinis << "\n";
-    }
 }
 
 int enterNumberOfStudents()

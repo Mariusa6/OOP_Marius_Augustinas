@@ -187,12 +187,10 @@ char askAverageOrMedian()
 
 void calculateGalutinisVector(char choice, std::vector<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis)
 {
-    for(int i; i < studentai.size(); i++)
+    for(int i = 0; i < studentai.size(); i++)
     {
-        if (choice == 'v')
-            studentai[i].galutinis = calculateGalutinisAverage(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
-        else
-            studentai[i].galutinis = calculateGalutinisMedian(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
+        studentai[i].galutinisVid = calculateGalutinisAverage(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
+        studentai[i].galutinisMed = calculateGalutinisMedian(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
     }
 }
 
@@ -218,6 +216,43 @@ double calculateGalutinisMedian(const studentas &s, double namuDarbaiSvertis, do
     return namuDarbaiSvertis * namuDarbaiMediana + egzaminasSvertis * s.egzaminas;
 }
 
+char askSortBy()
+{
+    char choice;
+    std::cout << "Rikiavimas pagal:\n"
+    << "1. Vardą\n"
+    << "2. Pavardę\n"
+    << "3. Galutinį įvertinimą pagal vidurkį\n"
+    << "4. Galutinį įvertinimą pagal medianą\n"
+    << "Jūsų pasirinkimas: ";
+     do
+     {
+         std::cin >> choice;
+         if (choice < '1' || choice > '4')
+             std::cout << "Netinkama įvestis, bandykite dar kartą: ";
+     } while (choice < '1' || choice > '4');
+     return choice;
+}
+
+void sortStudentai(std::vector<studentas> &studentai, char sortBy)
+{
+    std::sort(studentai.begin(), studentai.end(), [sortBy](const studentas &a, const studentas &b) {
+        switch (sortBy)
+        {
+            case '1':
+                return a.vardas < b.vardas;
+            case '2':
+                return a.pavarde < b.pavarde;
+            case '3':
+                return a.galutinisVid > b.galutinisVid;
+            case '4':
+                return a.galutinisMed > b.galutinisMed;
+            default:
+                return false;
+        }
+    });
+}
+
 void printStudentaiVector(const std::vector<studentas> &studentai, char choice)
 {
     std::cout << std::left << std::setw(20) << "Vardas"
@@ -228,7 +263,7 @@ void printStudentaiVector(const std::vector<studentas> &studentai, char choice)
     {
         std::cout << std::left << std::setw(20) << studentai[i].vardas
             << std::left << std::setw(20) << studentai[i].pavarde
-            << std::left << std::setw(11) << std::fixed << std::setprecision(2) << studentai[i].galutinis << "\n";
+            << std::left << std::setw(11) << std::fixed << std::setprecision(2) << (choice == 'v' ? studentai[i].galutinisVid : studentai[i].galutinisMed) << "\n";
     }
 }
 

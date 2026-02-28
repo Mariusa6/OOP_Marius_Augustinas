@@ -13,6 +13,7 @@
 #include <iomanip>      // setprecision, setw
 #include <windows.h>    // SetConsoleOutputCP, SetConsoleCP
 #include <random>      // mt19937, random_device
+#include <fstream>     // ifstream
 
 struct studentas 
 {
@@ -20,7 +21,8 @@ struct studentas
     std::string pavarde {};
     std::vector<int> namuDarbai;
     int egzaminas {};
-    double galutinis {};
+    double galutinisVid {};
+    double galutinisMed {};
 };
 
 const double namuDarbaiSvertis{0.4};
