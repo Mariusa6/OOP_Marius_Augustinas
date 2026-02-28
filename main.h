@@ -77,6 +77,7 @@ int enterPazymys(int n);
 std::vector<int> enterPazymiai(int n, int m);
 int enterEgzaminas(int n);
 char askAverageOrMedian();
+char askSortBy();
 
 // Calculation functions
 void calculateGalutinisArray(char choice, studentas* studentai, int n, double namuDarbaiSvertis, double egzaminasSvertis);
@@ -87,7 +88,11 @@ double calculateGalutinisAverage(const studentas &s, double namuDarbaiSvertis, d
 // File handling functions
 std::string enterFileName();
 std::vector<studentas> readStudentaiFromFile(const std::string &filename);
+std::string enterOutputFileName();
 void writeStudentaiToFile(const std::vector<studentas> &studentai, const std::string &filename);
+
+// Sorting functions
+void sortStudentai(std::vector<studentas> &studentai, char sortChoice);
 
 // Utility functions
 bool isAllLetters(const std::string &input);

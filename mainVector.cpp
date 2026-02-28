@@ -7,9 +7,12 @@ int main()
     printWelcome();
     int n {};
     char choice {};
+    char sortChoice {};
     char avgOrMedian {};
     std::vector<studentas> studentaiVector {};
     choice = askMenuChoice();
+    std::string inputFileName {};
+    std::string outputFileName {};
     switch (choice)
     {
         case '1':
@@ -32,6 +35,12 @@ int main()
             printStudentaiVector(studentaiVector, avgOrMedian);
             break;
         case '4':
+            inputFileName = enterFileName();
+            studentaiVector = readStudentaiFromFile(inputFileName);
+            sortChoice = askSortBy();
+            sortStudentai(studentaiVector, sortChoice);
+            outputFileName = enterOutputFileName();
+            writeStudentaiToFile(studentaiVector, outputFileName);
             break;
         case '5':
             std::cout << "Programa baigta.\n";

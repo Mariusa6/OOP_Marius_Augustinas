@@ -63,3 +63,35 @@ std::vector<studentas> readStudentaiFromFile(const std::string &filename)
     file.close();
     return studentai;
 }
+
+std::string enterOutputFileName()
+{
+    std::string tmp;
+    std::cout << "Įveskite išvesties failo pavadinimą (su .txt plėtiniu): ";
+    while (!(std::cin >> tmp) || tmp.size() < 5 || tmp.substr(tmp.size() - 4) != ".txt")
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Netinkama įvestis. Įveskite išvesties failo pavadinimą su .txt plėtiniu: ";
+    }
+    return tmp;
+}
+
+void writeStudentaiToFile(const std::vector<studentas> &studentai, const std::string &filename)
+{
+    std::ofstream file(filename);
+    if (!file.is_open())
+    {
+        std::cerr << "Nepavyko sukurti failo: " << filename << std::endl;
+        return;
+    }
+
+    file << "Vardas              Pavardė             Galutinis (Vid.)    Galutinis (Med.)\n";
+
+    for (const auto &s : studentai)
+    {
+        file << std::setw(20) << s.vardas << std::setw(20) << s.pavarde << std::setw(20) << s.galutinisVid << std::setw(20) << s.galutinisMed << "\n";
+    }
+    
+    file.close();
+}
