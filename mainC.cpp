@@ -14,7 +14,6 @@ int main()
     switch (choice)
     {
         case '1':
-            n = enterNumberOfStudents();
             studentai = enterStudentaiArray(n);
             avgOrMedian = askAverageOrMedian();
             calculateGalutinisArray(avgOrMedian, studentai, n, namuDarbaiSvertis, egzaminasSvertis);
@@ -42,28 +41,37 @@ int main()
     return 0;
 }
 
-int enterNumberOfStudents()
+studentas* enterStudentaiArray(int &n)
 {
-    int n;
-    std::cout << "Įveskite studentų skaičių: ";
-    while (!(std::cin >> n) || n <= 0)
-    {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Iveskite teigiamą skaičių.\n";
-        std::cout << "Įveskite studentų skaičių: ";
-    }
-    return n;
-}
-
-studentas* enterStudentaiArray(int n)
-{
+    n = 1;
     studentas* studentai = new studentas[n];
     for (int i = 0; i < n; i++)
     {
         studentai[i] = enterStudentas(i + 1);
+        if (i == n - 1 && askIfMoreStudents())
+        {
+            studentas* temp = new studentas[n + 1];
+            std::copy(studentai, studentai + n, temp);
+            delete[] studentai;
+            studentai = temp;
+            n++;
+        }
     }
     return studentai;
+}
+
+bool askIfMoreStudents()
+{
+    char choice;
+    std::cout << "Ar norite įvesti dar vieną studentą? (y/n): ";
+    do 
+    {
+        std::cin >> choice;
+        choice = tolower(choice);
+        if (choice != 'y' && choice != 'n')
+            std::cout << "Netinkama įvestis, bandykite 'y' arba 'n': ";
+    } while (choice != 'y' && choice != 'n');
+    return choice == 'y';
 }
 
 void calculateGalutinisArray(char choice, studentas* studentai, int n, double namuDarbaiSvertis, double egzaminasSvertis)
@@ -255,4 +263,18 @@ void printStudentaiVector(const std::vector<studentas> &studentai, char choice)
             << std::left << std::setw(20) << studentai[i].pavarde
             << std::left << std::setw(11) << std::fixed << std::setprecision(2) << studentai[i].galutinis << "\n";
     }
+}
+
+int enterNumberOfStudents()
+{
+    int n;
+    std::cout << "Įveskite studentų skaičių: ";
+    while (!(std::cin >> n) || n <= 0)
+    {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "Iveskite teigiamą skaičių.\n";
+        std::cout << "Įveskite studentų skaičių: ";
+    }
+    return n;
 }

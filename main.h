@@ -47,7 +47,9 @@ char askMenuChoice();
 
 // Generate functions
 std::vector<studentas> generateStudentai(int n);
+studentas* generateStudentaiArray(int n);
 std::vector<studentas> generateOnlyPazymiai(int n);
+studentas* generateOnlyPazymiaiArray(int n);
 std::string generateStudentName();
 std::string generateStudentSurname();
 int generateNumberOfPazymys();
@@ -62,7 +64,7 @@ void printStudentaiVector(const std::vector<studentas> &studentai, char choice);
 
 // User input functions
 int enterNumberOfStudents();
-studentas* enterStudentaiArray(int n);
+studentas* enterStudentaiArray(int &n);
 std::vector<studentas> enterStudentaiVector();
 bool askIfMoreStudents();
 studentas enterStudentas(int n);

@@ -16,6 +16,20 @@ std::vector<studentas> generateStudentai(int n)
     return studentai;
 }
 
+studentas* generateStudentaiArray(int n)
+{
+    studentas* studentai = new studentas[n];
+    for (int i = 0; i < n; i++)
+    {
+        studentai[i].vardas = generateStudentName();
+        studentai[i].pavarde = generateStudentSurname();
+        int m = generateNumberOfPazymys();
+        studentai[i].namuDarbai = generatePazymiai(m);
+        studentai[i].egzaminas = generatePazymys();
+    }
+    return studentai;
+}
+
 std::vector<studentas> generateOnlyPazymiai(int n)
 {
     std::vector<studentas> studentai;
@@ -32,19 +46,39 @@ std::vector<studentas> generateOnlyPazymiai(int n)
     return studentai;
 }
 
+studentas* generateOnlyPazymiaiArray(int n)
+{
+    studentas* studentai = new studentas[n];
+    for (int i = 0; i < n; i++)
+    {
+        studentai[i].vardas = enterName(i + 1);
+        studentai[i].pavarde = enterSurname(i + 1);
+        int m = generateNumberOfPazymys();
+        studentai[i].namuDarbai = generatePazymiai(m);
+        studentai[i].egzaminas = generatePazymys();
+    }
+    return studentai;
+}
+
 std::string generateStudentName()
 {
-    return lithuanianNames[std::mt19937{std::random_device{}()}() % lithuanianNames.size()];
+    std::uniform_int_distribution<int> dist(0, static_cast<int>(lithuanianNames.size()) - 1);
+    std::mt19937 rng(std::random_device{}());
+    return lithuanianNames[dist(rng)];
 }
 
 std::string generateStudentSurname()
 {
-    return lithuanianSurnames[std::mt19937{std::random_device{}()}() % lithuanianSurnames.size()];
+    std::uniform_int_distribution<int> dist(0, static_cast<int>(lithuanianSurnames.size()) - 1);
+    std::mt19937 rng(std::random_device{}());
+    return lithuanianSurnames[dist(rng)];
 }
 
 int generateNumberOfPazymys()
 {
-    return std::mt19937{std::random_device{}()}() % 10 + 1;
+    std::uniform_int_distribution<int> dist(0, 10);
+    std::mt19937 rng(std::random_device{}());
+    return dist(rng);
 }
 
 std::vector<int> generatePazymiai(int m) // m - pažymių skaičius
@@ -59,5 +93,7 @@ std::vector<int> generatePazymiai(int m) // m - pažymių skaičius
 
 int generatePazymys()
 {
-    return std::mt19937{std::random_device{}()}() % 10 + 1;
+    std::uniform_int_distribution<int> dist(1, 10);
+    std::mt19937 rng(std::random_device{}());
+    return dist(rng);
 }
