@@ -84,6 +84,11 @@ void calculateGalutinisVector(char choice, std::vector<studentas> &studentai, do
 double calculateGalutinisMedian(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);
 double calculateGalutinisAverage(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);
 
+// File handling functions
+std::string enterFileName();
+std::vector<studentas> readStudentaiFromFile(const std::string &filename);
+void writeStudentaiToFile(const std::vector<studentas> &studentai, const std::string &filename);
+
 // Utility functions
 bool isAllLetters(const std::string &input);
 
