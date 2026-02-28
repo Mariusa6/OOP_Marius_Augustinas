@@ -32,6 +32,8 @@ int main()
             printStudentaiVector(studentaiVector, avgOrMedian);
             break;
         case '4':
+            break;
+        case '5':
             std::cout << "Programa baigta.\n";
             break;
     }
