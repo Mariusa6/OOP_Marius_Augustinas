@@ -1,16 +1,16 @@
 # Studentų Informacinė Sistema OOP_Marius_Augustinas
 VU ISI Objektinio programavimo kurso laboratoriniai darbai
 
-v0.1 - C++ programa, skirta studentų informacijos įvedimui, saugojimui ir galutinio pažymio skaičiavimui.
+v0.2 - C++ programa, skirta studentų informacijos įvedimui, saugojimui, galutinio pažymio skaičiavimui, rikiavimui ir įrašymui į failą.
 
 ## Failų struktūra
 ```
 .
 ├── main.h          # Antraštės failas: bibliotekos, struktūros, funkcijų deklaracijos
-├── mainC.cpp       # Pagrindinis failas su masyvo (C-style array) implementacija
-├── mainVector.cpp  # Pagrindinis failas su std::vector implementacija
+├── main.cpp        # Pagrindinis programos failas
 ├── menu.cpp        # Meniu funkcijos
 ├── generate.cpp    # Studentų ir pažymių generavimo funkcijos
+├── file.cpp        # Failo skaitymo ir rašymo funkcijos
 └── print.cpp       # Išvedimo funkcijos
 ```
 
@@ -22,7 +22,8 @@ Saugo vieno studento informaciją:
 - `pavarde` — studento pavardė
 - `namuDarbai` — namų darbų pažymių sąrašas (`vector<int>`)
 - `egzaminas` — egzamino pažymys (1–10)
-- `galutinis` — apskaičiuotas galutinis pažymys
+- `galutinisVid` — galutinis pažymys, skaičiuotas pagal vidurkį
+- `galutinisMed` — galutinis pažymys, skaičiuotas pagal medianą
 
 ## Programos veikimas
 
@@ -36,52 +37,63 @@ Programa pradedama `main()` funkcijoje:
 - `1` — Įvesti studentus ranka
 - `2` — Generuoti tik pažymius (vardai ir pavardės įvedami rankiniu būdu)
 - `3` — Generuoti studentų vardus ir pažymius automatiškai
-- `4` — Baigti darbą
+- `4` — Nuskaityti studentus iš failo
+- `5` — Baigti darbą
 
 ### 3. Studentų įvedimas
 
-**`mainC.cpp`** — naudoja C stiliaus masyvą (`studentas*`):
-- `enterStudentaiArray(n)` — sukuria dinaminį masyvą ir užpildo jį kviesdama `enterStudentas(n)`
+- `enterStudentaiVector()` — kaupia studentus į vektorių, po kiekvieno klausia, ar pridėti dar vieną (`y/n`)
+- `enterStudentas(n)` — įveda vieno studento duomenis kviesdama pagalbines funkcijas:
+  - `enterName(n)` — įveda vardą (tik raidės)
+  - `enterSurname(n)` — įveda pavardę (tik raidės)
+  - `enterNumberOfPazymys(n)` — įveda namų darbų skaičių (≥ 0)
+  - `enterPazymiai(n, m)` — įveda kiekvieno namų darbo pažymį (1–10)
+  - `enterEgzaminas(n)` — įveda egzamino pažymį (1–10)
 
-**`mainVector.cpp`** — naudoja `std::vector`:
-- `enterStudentaiVector()` — kaupia studentus į vektorių, po kiekvieno klausia, ar pridėti dar vieną
-
-### 4. Vieno studento įvedimas — `enterStudentas(int n)`
-Kviečia šias pagalbines funkcijas:
-- `enterName(n)` — įveda vardą (tik raidės)
-- `enterSurname(n)` — įveda pavardę (tik raidės)
-- `enterNumberOfPazymys(n)` — įveda namų darbų skaičių (≥ 0)
-- `enterPazymiai(n, m)` — įveda kiekvieno namų darbo pažymį (1–10)
-- `enterEgzaminas(n)` — įveda egzamino pažymį (1–10)
-
-### 5. Studentų generavimas — `generate.cpp`
+### 4. Studentų generavimas — `generate.cpp`
 - `generateStudentai(n)` — generuoja pilnus studentų duomenis (vardą, pavardę ir pažymius)
 - `generateOnlyPazymiai(n)` — vardai ir pavardės įvedami rankiniu būdu, pažymiai generuojami
 - Vardai ir pavardės parenkamos iš lietuviškų vardų sąrašų (`lithuanianNames`, `lithuanianSurnames`)
-- Pažymiai generuojami atsitiktinai (1–10) naudojant `std::mt19937`
+- Pažymiai generuojami atsitiktinai (1–10) naudojant `std::mt19937` su `std::uniform_int_distribution`
 
-### 6. Metodo pasirinkimas — `askAverageOrMedian()`
-Prieš skaičiuojant galutinius pažymius, programa paklausia vartotojo, kokį metodą naudoti namų darbų rezultatams agreguoti:
-- `v` — **vidurkis** (aritmetinis namų darbų pažymių vidurkis)
-- `m` — **mediana** (vidurinė reikšmė surikiuotame pažymių sąraše)
+### 5. Failo skaitymas ir rašymas — `file.cpp` *(nauja v0.2)*
 
-### 7. Galutinio pažymio skaičiavimas
+**Skaitymas:**
+- `enterFileName()` — prašo vartotojo įvesti įvesties failo pavadinimą (turi turėti `.txt` plėtinį)
+- `readStudentaiFromFile(filename)` — nuskaito studentus iš `.txt` failo:
+  - Iš antraštės eilutės nustato namų darbų stulpelių skaičių (pagal `ND` žymėjimą)
+  - Nuskaito kiekvieną studentą: vardą, pavardę, namų darbų pažymius ir egzamino pažymį
+
+**Rašymas:**
+- `enterOutputFileName()` — prašo vartotojo įvesti išvesties failo pavadinimą (turi turėti `.txt` plėtinį)
+- `writeStudentaiToFile(studentai, filename)` — įrašo studentų sąrašą su abiem galutiniais pažymiais į `.txt` failą lentelės formatu
+
+### 6. Galutinio pažymio skaičiavimas
 Galutinis pažymys skaičiuojamas pagal formulę:
 ```
 galutinis = 0.4 × namų_darbų_vidurkis_arba_mediana + 0.6 × egzamino_pažymys
 ```
-- `calculateGalutinisAverage()` — skaičiuoja naudojant **vidurkį**
-- `calculateGalutinisMedian()` — skaičiuoja naudojant **medianą**
-- `calculateGalutinisArray()` — taiko skaičiavimą C stiliaus masyvui
-- `calculateGalutinisVector()` — taiko skaičiavimą `std::vector`
+Skirtingai nuo v0.1, dabar **abu metodai skaičiuojami vienu metu** ir saugomi atskiruose laukuose:
+- `calculateGalutinisAverage()` — skaičiuoja naudojant **vidurkį** → `galutinisVid`
+- `calculateGalutinisMedian()` — skaičiuoja naudojant **medianą** → `galutinisMed`
+- `calculateGalutinisVector()` — taiko abu skaičiavimus visiems studentams
+
+### 7. Rikiavimas — *(nauja v0.2)*
+Po skaičiavimo vartotojas gali pasirinkti rikiavimo kriterijų — `askSortBy()`:
+- `1` — pagal vardą (abėcėliškai)
+- `2` — pagal pavardę (abėcėliškai)
+- `3` — pagal galutinį įvertinimą (vidurkis, mažėjančia tvarka)
+- `4` — pagal galutinį įvertinimą (mediana, mažėjančia tvarka)
+
+Rikiavimas atliekamas `sortStudentai()` naudojant `std::sort` su lambda funkcija.
 
 ### 8. Rezultatų išvedimas — `print.cpp`
-Išveda studentų sąrašą lentelės formatu (stulpelyje nurodoma, ar naudotas vidurkis ar mediana):
+Išveda studentų sąrašą lentelės formatu su abiem galutiniais pažymiais:
 ```
-Vardas               Pavardė              Galutinis (Vid.)
----------------------------------------------
-Tomas                Kazlauskas           7.20
-Aistė                Petrauskaitė         8.60
+Vardas               Pavardė              Galutinis (Vid.)     Galutinis (Med.)
+-----------------------------------------------------------------------
+Tomas                Kazlauskas           7.20                 7.00
+Aistė                Petrauskaitė         8.60                 8.40
 ```
 
 ## Įvesties validacija
@@ -89,22 +101,21 @@ Visos įvesties funkcijos tikrina duomenis ir prašo įvesti iš naujo, jei:
 - Vardas / pavardė turi ne raides (`isAllLetters`)
 - Pažymys ne tarp 1 ir 10
 - Namų darbų skaičius neigiamas
-- Pasirinkimas `y/n` arba `v/m` yra netinkamas simbolis
-
-## Atminties valdymas
-`mainC.cpp` versijoje naudojama dinaminė atmintis (`new[]`) masyvui. Baigus darbą, atmintis atlaisvinama:
-```cpp
-delete[] studentai;
-```
-`mainVector.cpp` versijoje atminties valdymą automatiškai tvarko `std::vector`.
+- Failo pavadinimas neturi `.txt` plėtinio
+- Pasirinkimas `y/n` yra netinkamas simbolis
 
 ## Kompiliavimas
 ```bash
-# C masyvo versija
-g++ -std=c++17 mainC.cpp menu.cpp generate.cpp print.cpp -o programaC
-
-# Vector versija
-g++ -std=c++17 mainVector.cpp menu.cpp generate.cpp print.cpp -o programaVector
+g++ -std=c++17 main.cpp menu.cpp generate.cpp file.cpp print.cpp -o programa
+./programa
 ```
 
 > **Pastaba:** programa naudoja `<windows.h>`, todėl skirta Windows operacinei sistemai.
+
+## Pakeitimai nuo v0.1
+
+- Pašalintas `avgOrMedian` pasirinkimas — dabar **abu** galutiniai pažymiai skaičiuojami automatiškai ir saugomi atskiruose struktūros laukuose (`galutinisVid`, `galutinisMed`)
+- Pridėtas naujas meniu punktas: studentų nuskaitymas iš `.txt` failo
+- Pridėtas `file.cpp` su failo skaitymo ir rašymo funkcionalumu
+- Pridėtas studentų rikiavimas pagal pasirinktą kriterijų (`sortStudentai`, `askSortBy`)
+- Patobulintas atsitiktinių skaičių generavimas: naudojamas `std::uniform_int_distribution`
