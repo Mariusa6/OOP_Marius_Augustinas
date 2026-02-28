@@ -87,10 +87,14 @@ void writeStudentaiToFile(const std::vector<studentas> &studentai, const std::st
     }
 
     file << "Vardas              Pavardė             Galutinis (Vid.)    Galutinis (Med.)\n";
+    file << "----------------------------------------------------------------------------\n";
 
     for (const auto &s : studentai)
     {
-        file << std::setw(20) << s.vardas << std::setw(20) << s.pavarde << std::setw(20) << s.galutinisVid << std::setw(20) << s.galutinisMed << "\n";
+        file << std::left << std::setw(20) << s.vardas 
+        << std::left << std::setw(20) << s.pavarde 
+        << std::left << std::setw(20) << s.galutinisVid 
+        << std::left << std::setw(20) << s.galutinisMed << "\n";
     }
     
     file.close();

@@ -62,7 +62,7 @@ int generatePazymys();
 void printWelcome();
 void printNameAsk();
 void printStudentaiArray(studentas* studentai, int n, char choice);
-void printStudentaiVector(const std::vector<studentas> &studentai, char choice);
+void printStudentaiVector(const std::vector<studentas> &studentai);
 
 // User input functions
 int enterNumberOfStudents();
@@ -81,7 +81,7 @@ char askSortBy();
 
 // Calculation functions
 void calculateGalutinisArray(char choice, studentas* studentai, int n, double namuDarbaiSvertis, double egzaminasSvertis);
-void calculateGalutinisVector(char choice, std::vector<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis);
+void calculateGalutinisVector(std::vector<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis);
 double calculateGalutinisMedian(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);
 double calculateGalutinisAverage(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);
 

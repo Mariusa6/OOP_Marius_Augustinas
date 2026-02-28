@@ -8,7 +8,6 @@ int main()
     int n {};
     char choice {};
     char sortChoice {};
-    char avgOrMedian {};
     std::vector<studentas> studentaiVector {};
     choice = askMenuChoice();
     std::string inputFileName {};
@@ -17,26 +16,27 @@ int main()
     {
         case '1':
             studentaiVector = enterStudentaiVector();
-            avgOrMedian = askAverageOrMedian();
-            calculateGalutinisVector(avgOrMedian, studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
-            printStudentaiVector(studentaiVector, avgOrMedian);
+            calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
+            printStudentaiVector(studentaiVector);
+            break;
         case '2':
             n = enterNumberOfStudents();
             studentaiVector = generateOnlyPazymiai(n);
-            avgOrMedian = askAverageOrMedian();
-            calculateGalutinisVector(avgOrMedian, studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
-            printStudentaiVector(studentaiVector, avgOrMedian);
+            calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
+            printStudentaiVector(studentaiVector);
             break;
         case '3':
             n = enterNumberOfStudents();
             studentaiVector = generateStudentai(n);
-            avgOrMedian = askAverageOrMedian();
-            calculateGalutinisVector(avgOrMedian, studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
-            printStudentaiVector(studentaiVector, avgOrMedian);
+            calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
+            sortChoice = askSortBy();
+            sortStudentai(studentaiVector, sortChoice);
+            printStudentaiVector(studentaiVector);
             break;
         case '4':
             inputFileName = enterFileName();
             studentaiVector = readStudentaiFromFile(inputFileName);
+            calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
             sortChoice = askSortBy();
             sortStudentai(studentaiVector, sortChoice);
             outputFileName = enterOutputFileName();
@@ -194,7 +194,7 @@ char askAverageOrMedian()
     return choice;
 }
 
-void calculateGalutinisVector(char choice, std::vector<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis)
+void calculateGalutinisVector(std::vector<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis)
 {
     for(int i = 0; i < studentai.size(); i++)
     {
@@ -262,17 +262,19 @@ void sortStudentai(std::vector<studentas> &studentai, char sortBy)
     });
 }
 
-void printStudentaiVector(const std::vector<studentas> &studentai, char choice)
+void printStudentaiVector(const std::vector<studentas> &studentai)
 {
     std::cout << std::left << std::setw(20) << "Vardas"
         << std::left << std::setw(20) << "Pavardė"
-        << std::left << std::setw(11) << "Galutinis (" << (choice == 'v' ? "Vid.)" : "Med.)") << "\n";
-    std::cout << "---------------------------------------------\n";
+        << std::left << std::setw(20) << "Galutinis (Vid.)"
+        << std::left << std::setw(20) << "Galutinis (Med.)\n";
+    std::cout << "-----------------------------------------------------------------------\n";
     for(int i = 0; i < studentai.size(); i++)
     {
         std::cout << std::left << std::setw(20) << studentai[i].vardas
             << std::left << std::setw(20) << studentai[i].pavarde
-            << std::left << std::setw(11) << std::fixed << std::setprecision(2) << (choice == 'v' ? studentai[i].galutinisVid : studentai[i].galutinisMed) << "\n";
+            << std::left << std::setw(20) << std::fixed << std::setprecision(2) << studentai[i].galutinisVid
+            << std::left << std::setw(20) << studentai[i].galutinisMed << "\n";
     }
 }
 
