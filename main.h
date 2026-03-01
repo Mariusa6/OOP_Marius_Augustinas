@@ -14,6 +14,7 @@
 #include <windows.h>    // SetConsoleOutputCP, SetConsoleCP
 #include <random>      // mt19937, random_device
 #include <fstream>     // ifstream
+#include <chrono>       // high_resolution_clock
 
 struct studentas 
 {

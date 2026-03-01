@@ -245,6 +245,7 @@ char askSortBy()
 
 void sortStudentai(std::vector<studentas> &studentai, char sortBy)
 {
+    auto start = std::chrono::high_resolution_clock::now();
     std::sort(studentai.begin(), studentai.end(), [sortBy](const studentas &a, const studentas &b) {
         switch (sortBy)
         {
@@ -260,6 +261,9 @@ void sortStudentai(std::vector<studentas> &studentai, char sortBy)
                 return false;
         }
     });
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = end - start;
+    std::cout << "Rikiavimas užtruko: " << elapsed.count() << " sekundžių.\n";
 }
 
 void printStudentaiVector(const std::vector<studentas> &studentai)

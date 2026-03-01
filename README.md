@@ -3,6 +3,13 @@ VU ISI Objektinio programavimo kurso laboratoriniai darbai
 
 v0.2 - C++ programa, skirta studentų informacijos įvedimui, saugojimui, galutinio pažymio skaičiavimui, rikiavimui ir įrašymui į failą.
 
+## Testavimo rezultatai
+
+Testavimas atliktas po tris kartus kiekvienam failui:
+- `studentai10000.txt` nuskaitymas truko vidutiniškai 0,0209145 s, rikiavimas truko vidutiniškai 0,01572497 s
+- `studentai100000.txt` nuskaitymas truko vidutiniškai 0,2359327 s, rikiavimas truko vidutiniškai 0,1951437 s
+- `studentai1000000.txt` nuskaitymas truko vidutiniškai 1,321627 s, rikiavimas truko vidutiniškai 2,681916 s
+
 ## Failų struktūra
 ```
 .
