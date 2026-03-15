@@ -56,6 +56,8 @@
         "iomanip": "cpp",
         "sstream": "cpp",
         "fstream": "cpp",
-        "ios": "cpp"
+        "ios": "cpp",
+        "chrono": "cpp",
+        "ratio": "cpp"
     }
 }

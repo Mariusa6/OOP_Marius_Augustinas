@@ -5,6 +5,7 @@
 #include <string>       // string
 #include <vector>       // vector
 #include <windows.h>    // SetConsoleOutputCP, SetConsoleCP
+#include <exception>     // exception
 
 struct studentas 
 {

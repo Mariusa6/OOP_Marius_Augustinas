@@ -14,6 +14,9 @@ void printNameAsk()
 
 void printStudentaiVector(const std::vector<studentas> &studentai)
 {
+    if (studentai.empty())
+        throw std::runtime_error("Studentų sąrašas tuščias — nėra ko spausdinti.");
+    
     std::cout << std::left << std::setw(20) << "Vardas"
         << std::left << std::setw(20) << "Pavardė"
         << std::left << std::setw(20) << "Galutinis (Vid.)"

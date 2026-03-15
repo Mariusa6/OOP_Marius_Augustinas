@@ -6,5 +6,6 @@
 #include <algorithm> // sort
 #include <numeric>  // accumulate
 #include <chrono>   // high_resolution_clock
+#include <stdexcept> // runtime_error
 
 #endif // CALCUTALE_H_DEFINED

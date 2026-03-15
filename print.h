@@ -5,5 +5,6 @@
 #include <iostream> // cout, cin
 #include <iomanip>  // setprecision, setw
 #include <vector>   // vector
+#include <stdexcept> // runtime_error
 
 #endif // PRINT_H_DEFINED

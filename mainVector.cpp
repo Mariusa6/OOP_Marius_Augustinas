@@ -12,39 +12,47 @@ int main()
     choice = askMenuChoice();
     std::string inputFileName {};
     std::string outputFileName {};
-    switch (choice)
+    try
     {
-        case '1':
-            studentaiVector = enterStudentaiVector();
-            calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
-            printStudentaiVector(studentaiVector);
-            break;
-        case '2':
-            n = enterNumberOfStudents();
-            studentaiVector = generateOnlyPazymiai(n);
-            calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
-            printStudentaiVector(studentaiVector);
-            break;
-        case '3':
-            n = enterNumberOfStudents();
-            studentaiVector = generateStudentai(n);
-            calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
-            sortChoice = askSortBy();
-            sortStudentai(studentaiVector, sortChoice);
-            printStudentaiVector(studentaiVector);
-            break;
-        case '4':
-            inputFileName = enterFileName();
-            studentaiVector = readStudentaiFromFile(inputFileName);
-            calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
-            sortChoice = askSortBy();
-            sortStudentai(studentaiVector, sortChoice);
-            outputFileName = enterOutputFileName();
-            writeStudentaiToFile(studentaiVector, outputFileName);
-            break;
-        case '5':
-            std::cout << "Programa baigta.\n";
-            break;
+        switch (choice)
+        {
+            case '1':
+                studentaiVector = enterStudentaiVector();
+                calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
+                printStudentaiVector(studentaiVector);
+                break;
+            case '2':
+                n = enterNumberOfStudents();
+                studentaiVector = generateOnlyPazymiai(n);
+                calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
+                printStudentaiVector(studentaiVector);
+                break;
+            case '3':
+                n = enterNumberOfStudents();
+                studentaiVector = generateStudentai(n);
+                calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
+                sortChoice = askSortBy();
+                sortStudentai(studentaiVector, sortChoice);
+                printStudentaiVector(studentaiVector);
+                break;
+            case '4':
+                inputFileName = enterFileName();
+                studentaiVector = readStudentaiFromFile(inputFileName);
+                calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
+                sortChoice = askSortBy();
+                sortStudentai(studentaiVector, sortChoice);
+                outputFileName = enterOutputFileName();
+                writeStudentaiToFile(studentaiVector, outputFileName);
+                break;
+            case '5':
+                std::cout << "Programa baigta.\n";
+                break;
+        }
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "Klaida: " << e.what() << std::endl;
+        return 1;
     }
     return 0;
 }

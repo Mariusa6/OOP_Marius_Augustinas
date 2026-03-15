@@ -18,19 +18,16 @@ std::vector<studentas> readStudentaiFromFile(const std::string &filename)
 {
     std::vector<studentas> studentai;
     std::ifstream file(filename);
+
     if (!file.is_open())
-    {
-        std::cerr << "Nepavyko atidaryti failo: " << filename << std::endl;
-        return studentai;
-    }
+        throw std::runtime_error("Nepavyko atidaryti failo: " + filename);
 
     std::string line;
 
     auto start = std::chrono::high_resolution_clock::now();
 
-    // Read header to determine number of ND columns
     if (!std::getline(file, line))
-        return studentai;
+        throw std::runtime_error("Failas tuščias arba sugadintas: " + filename);
 
     std::istringstream headerStream(line);
     std::string token;
@@ -41,24 +38,32 @@ std::vector<studentas> readStudentaiFromFile(const std::string &filename)
             ndCount++;
     }
 
-    // Read student rows
+    int lineNumber = 1;
     while (std::getline(file, line))
     {
+        lineNumber++;
         if (line.empty()) continue;
 
         std::istringstream ss(line);
         studentas s;
 
-        ss >> s.vardas >> s.pavarde;
+        if (!(ss >> s.vardas >> s.pavarde))
+            throw std::runtime_error("Eilutėje " + std::to_string(lineNumber) + " trūksta vardo arba pavardės.");
 
         for (int i = 0; i < ndCount; i++)
         {
             int nd;
-            if (ss >> nd)
-                s.namuDarbai.push_back(nd);
+            if (!(ss >> nd))
+                throw std::runtime_error("Eilutėje " + std::to_string(lineNumber) + " trūksta namų darbo pažymio.");
+            if (nd < 1 || nd > 10)
+                throw std::runtime_error("Eilutėje " + std::to_string(lineNumber) + " pažymys už ribų (1-10): " + std::to_string(nd));
+            s.namuDarbai.push_back(nd);
         }
 
-        ss >> s.egzaminas;
+        if (!(ss >> s.egzaminas))
+            throw std::runtime_error("Eilutėje " + std::to_string(lineNumber) + " trūksta egzamino pažymio.");
+        if (s.egzaminas < 1 || s.egzaminas > 10)
+            throw std::runtime_error("Eilutėje " + std::to_string(lineNumber) + " egzamino pažymys už ribų (1-10): " + std::to_string(s.egzaminas));
 
         studentai.push_back(s);
     }
@@ -85,11 +90,9 @@ std::string enterOutputFileName()
 void writeStudentaiToFile(const std::vector<studentas> &studentai, const std::string &filename)
 {
     std::ofstream file(filename);
+    
     if (!file.is_open())
-    {
-        std::cerr << "Nepavyko sukurti failo: " << filename << std::endl;
-        return;
-    }
+        throw std::runtime_error("Nepavyko sukurti failo: " + filename);
 
     file << "Vardas              Pavardė             Galutinis (Vid.)    Galutinis (Med.)\n";
     file << "----------------------------------------------------------------------------\n";

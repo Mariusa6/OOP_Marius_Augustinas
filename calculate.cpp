@@ -2,6 +2,9 @@
 
 void calculateGalutinisVector(std::vector<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis)
 {
+    if (studentai.empty())
+        throw std::runtime_error("Studentų sąrašas tuščias — nėra ką skaičiuoti.");
+
     for(int i = 0; i < studentai.size(); i++)
     {
         studentai[i].galutinisVid = calculateGalutinisAverage(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
