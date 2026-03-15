@@ -1,20 +1,10 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef MAIN_H_DEFINED
+#define MAIN_H_DEFINED
 
 #include <iostream>     // cout, cin
 #include <string>       // string
-#include <string_view>  // string_view
 #include <vector>       // vector
-#include <limits>       // numeric_limits
-#include <ios>          // streamsize
-#include <algorithm>    // all_of
-#include <cctype>       // isalpha
-#include <numeric>      // accumulate
-#include <iomanip>      // setprecision, setw
 #include <windows.h>    // SetConsoleOutputCP, SetConsoleCP
-#include <random>      // mt19937, random_device
-#include <fstream>     // ifstream
-#include <chrono>       // high_resolution_clock
 
 struct studentas 
 {

@@ -1,4 +1,4 @@
-#include "main.h"
+#include "generate.h"
 
 std::vector<studentas> generateStudentai(int n)
 {
