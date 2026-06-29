@@ -1,5 +1,5 @@
-#ifndef CALCUTALE_H_DEFINED
-#define CALCUTALE_H_DEFINED
+#ifndef CALCULATE_H_DEFINED
+#define CALCULATE_H_DEFINED
 
 #include "main.h"
 #include <vector>   // vector
@@ -8,4 +8,4 @@
 #include <chrono>   // high_resolution_clock
 #include <stdexcept> // runtime_error
 
-#endif // CALCUTALE_H_DEFINED
+#endif // CALCULATE_H_DEFINED
