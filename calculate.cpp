@@ -5,10 +5,10 @@ void calculateGalutinisVector(std::vector<studentas> &studentai, double namuDarb
     if (studentai.empty())
         throw std::runtime_error("Studentų sąrašas tuščias — nėra ką skaičiuoti.");
 
-    for(int i = 0; i < studentai.size(); i++)
+    for(auto &s : studentai)
     {
-        studentai[i].galutinisVid = calculateGalutinisAverage(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
-        studentai[i].galutinisMed = calculateGalutinisMedian(studentai[i], namuDarbaiSvertis, egzaminasSvertis);
+        s.galutinisVid = calculateGalutinisAverage(s, namuDarbaiSvertis, egzaminasSvertis);
+        s.galutinisMed = calculateGalutinisMedian(s, namuDarbaiSvertis, egzaminasSvertis);
     }
 }
 
