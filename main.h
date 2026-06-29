@@ -17,6 +17,9 @@ struct studentas
     double galutinisMed {};
 };
 
+const int minPazymys{1};
+const int maxPazymys{10};
+
 const double namuDarbaiSvertis{0.4};
 const double egzaminasSvertis{0.6};
 

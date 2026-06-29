@@ -75,11 +75,11 @@ int enterPazymys(int n)
     int tmp {};
 
     std::cout << n << " pazymys: ";
-    while (!(std::cin >> tmp) || tmp < 1 || tmp > 10)
+    while (!(std::cin >> tmp) || tmp < minPazymys || tmp > maxPazymys)
     {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Iveskite skaiciu nuo 1 iki 10.\n";
+        std::cout << "Iveskite skaiciu nuo " << minPazymys << " iki " << maxPazymys << ".\n";
         std::cout << n << " pazymys: ";
     }
 
@@ -102,11 +102,11 @@ int enterEgzaminas(int n)
     int tmp{};
 
     std::cout << "Iveskite kiek #" << n << " studentas gavo iš egzamino.\n";
-    while (!(std::cin >> tmp) || tmp < 1 || tmp > 10)
+    while (!(std::cin >> tmp) || tmp < minPazymys || tmp > maxPazymys)
     {
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Iveskite skaiciu nuo 1 iki 10.\n";
+        std::cout << "Iveskite skaiciu nuo " << minPazymys << " iki " << maxPazymys << ".\n";
         std::cout << "Iveskite kiek #" << n << " studentas gavo iš egzamino.\n";
     }
 

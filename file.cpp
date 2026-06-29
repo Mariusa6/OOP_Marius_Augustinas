@@ -55,15 +55,15 @@ std::vector<studentas> readStudentaiFromFile(const std::string &filename)
             int nd;
             if (!(ss >> nd))
                 throw std::runtime_error("Eilutėje " + std::to_string(lineNumber) + " trūksta namų darbo pažymio.");
-            if (nd < 1 || nd > 10)
-                throw std::runtime_error("Eilutėje " + std::to_string(lineNumber) + " pažymys už ribų (1-10): " + std::to_string(nd));
+            if (nd < minPazymys || nd > maxPazymys)
+                throw std::runtime_error("Eilutėje " + std::to_string(lineNumber) + " pažymys už ribų (" + std::to_string(minPazymys) + "-" + std::to_string(maxPazymys) + "): " + std::to_string(nd));
             s.namuDarbai.push_back(nd);
         }
 
         if (!(ss >> s.egzaminas))
             throw std::runtime_error("Eilutėje " + std::to_string(lineNumber) + " trūksta egzamino pažymio.");
-        if (s.egzaminas < 1 || s.egzaminas > 10)
-            throw std::runtime_error("Eilutėje " + std::to_string(lineNumber) + " egzamino pažymys už ribų (1-10): " + std::to_string(s.egzaminas));
+        if (s.egzaminas < minPazymys || s.egzaminas > maxPazymys)
+            throw std::runtime_error("Eilutėje " + std::to_string(lineNumber) + " egzamino pažymys už ribų (" + std::to_string(minPazymys) + "-" + std::to_string(maxPazymys) + "): " + std::to_string(s.egzaminas));
 
         studentai.push_back(s);
     }

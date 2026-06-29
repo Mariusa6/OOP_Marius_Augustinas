@@ -93,7 +93,7 @@ std::vector<int> generatePazymiai(int m) // m - pažymių skaičius
 
 int generatePazymys()
 {
-    std::uniform_int_distribution<int> dist(1, 10);
+    std::uniform_int_distribution<int> dist(minPazymys, maxPazymys);
     std::mt19937 rng(std::random_device{}());
     return dist(rng);
 }
