@@ -1,5 +1,11 @@
 #include "generate.h"
 
+std::mt19937 getRng()
+{
+    static std::mt19937 rng(std::random_device{}());
+    return rng;
+}
+
 std::vector<studentas> generateStudentai(int n)
 {
     std::vector<studentas> studentai;
@@ -63,21 +69,21 @@ studentas* generateOnlyPazymiaiArray(int n)
 std::string generateStudentName()
 {
     std::uniform_int_distribution<int> dist(0, static_cast<int>(lithuanianNames.size()) - 1);
-    std::mt19937 rng(std::random_device{}());
+    std::mt19937 rng(getRng());
     return lithuanianNames[dist(rng)];
 }
 
 std::string generateStudentSurname()
 {
     std::uniform_int_distribution<int> dist(0, static_cast<int>(lithuanianSurnames.size()) - 1);
-    std::mt19937 rng(std::random_device{}());
+    std::mt19937 rng(getRng());
     return lithuanianSurnames[dist(rng)];
 }
 
 int generateNumberOfPazymys()
 {
     std::uniform_int_distribution<int> dist(0, 10);
-    std::mt19937 rng(std::random_device{}());
+    std::mt19937 rng(getRng());
     return dist(rng);
 }
 
@@ -94,6 +100,6 @@ std::vector<int> generatePazymiai(int m) // m - pažymių skaičius
 int generatePazymys()
 {
     std::uniform_int_distribution<int> dist(minPazymys, maxPazymys);
-    std::mt19937 rng(std::random_device{}());
+    std::mt19937 rng(getRng());
     return dist(rng);
 }
