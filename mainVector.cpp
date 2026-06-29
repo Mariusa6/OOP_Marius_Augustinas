@@ -8,6 +8,7 @@ int main()
     int n {};
     char choice {};
     char sortChoice {};
+    char outputChoice {};
     std::vector<studentas> studentaiVector {};
     choice = askMenuChoice();
     std::string inputFileName {};
@@ -19,13 +20,15 @@ int main()
             case '1':
                 studentaiVector = enterStudentaiVector();
                 calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
-                printStudentaiVector(studentaiVector);
+                outputChoice = askOutputChoice();
+                outputStudentai(studentaiVector, outputChoice);
                 break;
             case '2':
                 n = enterNumberOfStudents();
                 studentaiVector = generateOnlyPazymiai(n);
                 calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
-                printStudentaiVector(studentaiVector);
+                outputChoice = askOutputChoice();
+                outputStudentai(studentaiVector, outputChoice);
                 break;
             case '3':
                 n = enterNumberOfStudents();
@@ -33,7 +36,8 @@ int main()
                 calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
                 sortChoice = askSortBy();
                 sortStudentai(studentaiVector, sortChoice);
-                printStudentaiVector(studentaiVector);
+                outputChoice = askOutputChoice();
+                outputStudentai(studentaiVector, outputChoice);
                 break;
             case '4':
                 inputFileName = enterFileName();
@@ -41,8 +45,8 @@ int main()
                 calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
                 sortChoice = askSortBy();
                 sortStudentai(studentaiVector, sortChoice);
-                outputFileName = enterOutputFileName();
-                writeStudentaiToFile(studentaiVector, outputFileName);
+                outputChoice = askOutputChoice();
+                outputStudentai(studentaiVector, outputChoice);
                 break;
             case '5':
                 std::cout << "Programa baigta.\n";

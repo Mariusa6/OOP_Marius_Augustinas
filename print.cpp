@@ -22,7 +22,7 @@ void printStudentaiVector(const std::vector<studentas> &studentai)
         << std::left << std::setw(20) << "Galutinis (Vid.)"
         << std::left << std::setw(20) << "Galutinis (Med.)\n";
     std::cout << "-----------------------------------------------------------------------\n";
-    for(const auto &s : studentai)
+    for(auto &s : studentai)
     {
         std::cout << std::left << std::setw(20) << s.vardas
             << std::left << std::setw(20) << s.pavarde

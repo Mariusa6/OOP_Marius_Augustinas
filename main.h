@@ -58,6 +58,7 @@ void printWelcome();
 void printNameAsk();
 void printStudentaiArray(studentas* studentai, int n, char choice);
 void printStudentaiVector(const std::vector<studentas> &studentai);
+void outputStudentai(const std::vector<studentas> &studentai, char choice);
 
 // User input functions
 int enterNumberOfStudents();
@@ -73,6 +74,7 @@ std::vector<int> enterPazymiai(int n, int m);
 int enterEgzaminas(int n);
 char askAverageOrMedian();
 char askSortBy();
+char askOutputChoice();
 
 // Calculation functions
 void calculateGalutinisArray(char choice, studentas* studentai, int n, double namuDarbaiSvertis, double egzaminasSvertis);

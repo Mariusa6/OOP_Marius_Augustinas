@@ -78,3 +78,19 @@ bool askIfMoreStudents()
     } while (choice != 'y' && choice != 'n');
     return choice == 'y';
 }
+
+char askOutputChoice()
+{
+    char choice;
+    std::cout << "Pasirinkite išvesties formatą:\n"
+              << "1. Išvesti į konsolę\n"
+              << "2. Išvesti į failą\n"
+              << "Jūsų pasirinkimas: ";
+    do
+    {
+        std::cin >> choice;
+        if (choice < '1' || choice > '2')
+            std::cout << "Netinkama įvestis, bandykite dar kartą: ";
+    } while (choice < '1' || choice > '2');
+    return choice;
+}
