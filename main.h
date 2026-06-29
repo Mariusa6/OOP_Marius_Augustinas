@@ -47,8 +47,8 @@ std::vector<studentas> generateStudentai(int n);
 studentas* generateStudentaiArray(int n);
 std::vector<studentas> generateOnlyPazymiai(int n);
 studentas* generateOnlyPazymiaiArray(int n);
-std::vector<std::string> generateStudentFirstNames(int n);
-std::vector<std::string> generateStudentSurnames(int n);
+std::string generateStudentName(int n);
+std::string generateStudentSurname(int n);
 int generateNumberOfPazymys();
 std::vector<int> generatePazymiai(int m);
 
