@@ -107,3 +107,29 @@ void writeStudentaiToFile(const std::vector<studentas> &studentai, const std::st
     
     file.close();
 }
+
+void writeStudentaiListToFile(const std::vector<studentas> &studentai, const std::string &filename)
+{
+    std::ofstream file(filename);
+    if (!file.is_open())
+        throw std::runtime_error("Nepavyko sukurti failo: " + filename);
+    
+    file << std::left << std::setw(25) << "Vardas" 
+         << std::left << std::setw(25) << "Pavardė";
+    for (int i = 1; i <= NUMBER_OF_PAZYMYS; ++i)
+    {
+        file << std::right << std::setw(10) << ("ND" + std::to_string(i));
+    }
+    file << std::right << std::setw(10) << "Egzaminas" << "\n";
+
+    for (const auto &s : studentai)
+    {
+        file << std::left << std::setw(25) << s.vardas 
+             << std::left << std::setw(25) << s.pavarde;
+        for (const auto &nd : s.namuDarbai)
+        {
+            file << std::right << std::setw(10) << nd;
+        }
+        file << std::right << std::setw(10) << s.egzaminas << "\n";
+    }
+}

@@ -5,7 +5,9 @@
 #include <string>       // string
 #include <vector>       // vector
 #include <windows.h>    // SetConsoleOutputCP, SetConsoleCP
-#include <exception>     // exception
+#include <exception>    // exception
+
+#define NUMBER_OF_PAZYMYS 15
 
 struct studentas 
 {
@@ -49,7 +51,6 @@ std::vector<studentas> generateOnlyPazymiai(int n);
 studentas* generateOnlyPazymiaiArray(int n);
 std::string generateStudentName(int n);
 std::string generateStudentSurname(int n);
-int generateNumberOfPazymys();
 std::vector<int> generatePazymiai(int m);
 
 // Print functions
@@ -57,7 +58,6 @@ void printWelcome();
 void printNameAsk();
 void printStudentaiArray(studentas* studentai, int n, char choice);
 void printStudentaiVector(const std::vector<studentas> &studentai);
-void outputStudentai(const std::vector<studentas> &studentai, char choice);
 
 // User input functions
 int enterNumberOfStudents();
@@ -86,6 +86,8 @@ std::string enterFileName();
 std::vector<studentas> readStudentaiFromFile(const std::string &filename);
 std::string enterOutputFileName();
 void writeStudentaiToFile(const std::vector<studentas> &studentai, const std::string &filename);
+void writeStudentaiListToFile(const std::vector<studentas> &studentai, const std::string &filename);
+void outputStudentai(const std::vector<studentas> &studentai, char choice);
 
 // Sorting functions
 void sortStudentai(std::vector<studentas> &studentai, char sortChoice);

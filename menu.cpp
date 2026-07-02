@@ -8,14 +8,15 @@ char askMenuChoice()
     std::cout << "2. Generuoti tik pažymius\n";
     std::cout << "3. Generuoti studentų vardus ir pažymius\n";
     std::cout << "4. Nuskaityti studentus iš failo\n";
-    std::cout << "5. Baigti darbą\n";
+    std::cout << "5. Generuoti studentų failą\n";
+    std::cout << "6. Baigti darbą\n";
     std::cout << "Jūsų pasirinkimas: ";
     do
     {
         std::cin >> choice;
-        if (choice < '1' || choice > '5')
+        if (choice < '1' || choice > '6')
             std::cout << "Netinkama įvestis, bandykite dar kartą: ";
-    } while (choice < '1' || choice > '5');
+    } while (choice < '1' || choice > '6');
     return choice;
 }
 
