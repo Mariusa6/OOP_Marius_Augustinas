@@ -12,8 +12,8 @@ std::vector<studentas> generateStudentai(int n)
     for (int i = 0; i < n; i++)
     {
         studentas s;
-        s.vardas = generateStudentName(n);
-        s.pavarde = generateStudentSurname(n);
+        s.vardas = "Vardas" + std::to_string(i + 1);
+        s.pavarde = "Pavarde" + std::to_string(i + 1);
         int m = NUMBER_OF_PAZYMYS;
         s.namuDarbai = generatePazymiai(m);
         s.egzaminas = generatePazymiai(1)[0];
@@ -27,8 +27,8 @@ studentas* generateStudentaiArray(int n)
     studentas* studentai = new studentas[n];
     for (int i = 0; i < n; i++)
     {
-        studentai[i].vardas = generateStudentName(n);
-        studentai[i].pavarde = generateStudentSurname(n);
+        studentai[i].vardas = "Vardas" + std::to_string(i + 1);
+        studentai[i].pavarde = "Pavarde" + std::to_string(i + 1);
         int m = NUMBER_OF_PAZYMYS;
         studentai[i].namuDarbai = generatePazymiai(m);
         studentai[i].egzaminas = generatePazymiai(1)[0];
@@ -64,20 +64,6 @@ studentas* generateOnlyPazymiaiArray(int n)
         studentai[i].egzaminas = generatePazymiai(1)[0];
     }
     return studentai;
-}
-
-std::string generateStudentName(int n)
-{
-    std::uniform_int_distribution<int> dist(0, static_cast<int>(lithuanianNames.size()) - 1);
-    std::mt19937 &rng = getRng();
-    return lithuanianNames[dist(rng)];
-}
-
-std::string generateStudentSurname(int n)
-{
-    std::uniform_int_distribution<int> dist(0, static_cast<int>(lithuanianSurnames.size()) - 1);
-    std::mt19937 &rng = getRng();
-    return lithuanianSurnames[dist(rng)];
 }
 
 std::vector<int> generatePazymiai(int m) // m - pažymių skaičius

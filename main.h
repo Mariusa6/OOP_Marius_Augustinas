@@ -25,20 +25,6 @@ const int maxPazymys{10};
 const double namuDarbaiSvertis{0.4};
 const double egzaminasSvertis{0.6};
 
-const std::vector<std::string> lithuanianNames = {
-  "Tomas", "Lukas", "Mantas", "Erikas", "Darius",
-  "Mindaugas", "Vytautas", "Andrius", "Justas", "Rokas",
-  "Aistė", "Rūta", "Indrė", "Gabija", "Eglė",
-  "Dovilė", "Kristina", "Agnė", "Viktorija", "Jūratė"
-};
-
-const std::vector<std::string> lithuanianSurnames = {
-  "Kazlauskas", "Petrauskas", "Jankauskas", "Paulauskas", "Stankevičius",
-  "Žukauskas", "Butkus", "Vasiliauskas", "Mockus", "Grigas",
-  "Kairytė", "Stonytė", "Norkutė", "Rimkutė", "Barkauskaitė",
-  "Tamošiūnaitė", "Januševičiūtė", "Gedvilaitė", "Urbonaitė", "Mikalajūnaitė"
-};
-
 // Function declarations
 
 // Menu functions
@@ -49,8 +35,6 @@ std::vector<studentas> generateStudentai(int n);
 studentas* generateStudentaiArray(int n);
 std::vector<studentas> generateOnlyPazymiai(int n);
 studentas* generateOnlyPazymiaiArray(int n);
-std::string generateStudentName(int n);
-std::string generateStudentSurname(int n);
 std::vector<int> generatePazymiai(int m);
 
 // Print functions
