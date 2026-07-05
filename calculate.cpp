@@ -36,7 +36,6 @@ double calculateGalutinisMedian(const studentas &s, double namuDarbaiSvertis, do
 
 void sortStudentai(std::vector<studentas> &studentai, char sortBy)
 {
-    auto start = std::chrono::high_resolution_clock::now();
     std::sort(studentai.begin(), studentai.end(), [sortBy](const studentas &a, const studentas &b) {
         switch (sortBy)
         {
@@ -52,26 +51,16 @@ void sortStudentai(std::vector<studentas> &studentai, char sortBy)
                 return false;
         }
     });
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> elapsed = end - start;
-    std::cout << "Rikiavimas užtruko: " << elapsed.count() << " sekundžių.\n";
 }
 
-splitResult splitStudentai(const std::vector<studentas> &studentai, char sortBy)
+splitResult splitStudentai(const std::vector<studentas> &studentai)
 {
     splitResult result;
 
     std::partition_copy(studentai.begin(), studentai.end(),
         std::back_inserter(result.kietiakai), std::back_inserter(result.vargsiukai),
-        [sortBy](const studentas &s) {
-            switch (sortBy) {
-                case '3':
-                    return s.galutinisVid >= 5.0;
-                case '4':
-                    return s.galutinisMed >= 5.0;
-                default:
-                    return false;
-            }
+        [](const studentas &s) {
+            return s.galutinisVid >= 5.0;
         });
 
     return result;

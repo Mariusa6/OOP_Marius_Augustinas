@@ -26,7 +26,7 @@ int main()
                     calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
                     sortChoice = askSortBy();
                     sortStudentai(studentaiVector, sortChoice);
-                    result = splitStudentai(studentaiVector, sortChoice);
+                    result = splitStudentai(studentaiVector);
                     outputChoice = askOutputChoice();
                     outputStudentai(result.kietiakai, outputChoice);
                     outputStudentai(result.vargsiukai, outputChoice);
@@ -37,7 +37,7 @@ int main()
                     calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
                     sortChoice = askSortBy();
                     sortStudentai(studentaiVector, sortChoice);
-                    result = splitStudentai(studentaiVector, sortChoice);
+                    result = splitStudentai(studentaiVector);
                     outputChoice = askOutputChoice();
                     outputStudentai(result.kietiakai, outputChoice);
                     outputStudentai(result.vargsiukai, outputChoice);
@@ -48,7 +48,7 @@ int main()
                     calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
                     sortChoice = askSortBy();
                     sortStudentai(studentaiVector, sortChoice);
-                    result = splitStudentai(studentaiVector, sortChoice);
+                    result = splitStudentai(studentaiVector);
                     outputChoice = askOutputChoice();
                     outputStudentai(result.kietiakai, outputChoice);
                     outputStudentai(result.vargsiukai, outputChoice);
@@ -59,7 +59,7 @@ int main()
                     calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
                     sortChoice = askSortBy();
                     sortStudentai(studentaiVector, sortChoice);
-                    result = splitStudentai(studentaiVector, sortChoice);
+                    result = splitStudentai(studentaiVector);
                     outputChoice = askOutputChoice();
                     outputStudentai(result.kietiakai, outputChoice);
                     outputStudentai(result.vargsiukai, outputChoice);
@@ -69,6 +69,15 @@ int main()
                     writeStudentaiListToFile(studentaiVector, enterOutputFileName());
                     break;
                 case '6':
+                    testGenerateStudentai(1000);
+                    testGenerateStudentai(10000);
+                    testGenerateStudentai(100000);
+                    testGenerateStudentai(1000000);
+                    testGenerateStudentai(10000000);
+                    break;
+                case '7':
+                    break;
+                case '8':
                     std::cout << "Programa baigta.\n";
                     menuLoop = false;
                     break;

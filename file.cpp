@@ -24,8 +24,6 @@ std::vector<studentas> readStudentaiFromFile(const std::string &filename)
 
     std::string line;
 
-    auto start = std::chrono::high_resolution_clock::now();
-
     if (!std::getline(file, line))
         throw std::runtime_error("Failas tuščias arba sugadintas: " + filename);
 
@@ -68,9 +66,6 @@ std::vector<studentas> readStudentaiFromFile(const std::string &filename)
         studentai.push_back(s);
     }
     file.close();
-    auto end = std::chrono::high_resolution_clock::now();
-    std::chrono::duration<double> elapsed = end - start;
-    std::cout << "Studentų nuskaitymas užtruko: " << elapsed.count() << " sekundžių.\n";
     return studentai;
 }
 

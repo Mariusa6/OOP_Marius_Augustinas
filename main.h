@@ -81,7 +81,10 @@ void outputStudentai(const std::vector<studentas> &studentai, char choice);
 
 // Sorting functions
 void sortStudentai(std::vector<studentas> &studentai, char sortChoice);
-splitResult splitStudentai(const std::vector<studentas> &studentai, char sortBy);
+splitResult splitStudentai(const std::vector<studentas> &studentai);
+
+// Testing functions
+void testGenerateStudentai(int n);
 
 // Utility functions
 bool isAllLetters(const std::string &input);

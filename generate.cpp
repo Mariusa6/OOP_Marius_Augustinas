@@ -9,6 +9,7 @@ std::mt19937& getRng()
 std::vector<studentas> generateStudentai(int n)
 {
     std::vector<studentas> studentai;
+    studentai.reserve(n);
     for (int i = 0; i < n; i++)
     {
         studentas s;
@@ -39,6 +40,7 @@ studentas* generateStudentaiArray(int n)
 std::vector<studentas> generateOnlyPazymiai(int n)
 {
     std::vector<studentas> studentai;
+    studentai.reserve(n);
     for (int i = 0; i < n; i++)
     {
         studentas s;
