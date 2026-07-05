@@ -11,13 +11,13 @@ int main()
     char sortChoice {};
     char outputChoice {};
     std::vector<studentas> studentaiVector {};
-    choice = askMenuChoice();
     std::string inputFileName {};
     std::string outputFileName {};
     try
     {
         while(menuLoop)
         {
+            choice = askMenuChoice();
             switch (choice)
             {
                 case '1':
@@ -60,7 +60,6 @@ int main()
                     menuLoop = false;
                     break;
             }
-            choice = askMenuChoice();
         }
     }
     catch(const std::exception& e)

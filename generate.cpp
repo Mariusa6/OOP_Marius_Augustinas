@@ -12,8 +12,8 @@ std::vector<studentas> generateStudentai(int n)
     for (int i = 0; i < n; i++)
     {
         studentas s;
-        s.vardas = "Vardas" + std::to_string(i + 1);
-        s.pavarde = "Pavarde" + std::to_string(i + 1);
+        s.vardas = "VardasNR" + std::to_string(i + 1);
+        s.pavarde = "PavardeNR" + std::to_string(i + 1);
         int m = NUMBER_OF_PAZYMYS;
         s.namuDarbai = generatePazymiai(m);
         s.egzaminas = generatePazymiai(1)[0];
@@ -27,8 +27,8 @@ studentas* generateStudentaiArray(int n)
     studentas* studentai = new studentas[n];
     for (int i = 0; i < n; i++)
     {
-        studentai[i].vardas = "Vardas" + std::to_string(i + 1);
-        studentai[i].pavarde = "Pavarde" + std::to_string(i + 1);
+        studentai[i].vardas = "VardasNR" + std::to_string(i + 1);
+        studentai[i].pavarde = "PavardeNR" + std::to_string(i + 1);
         int m = NUMBER_OF_PAZYMYS;
         studentai[i].namuDarbai = generatePazymiai(m);
         studentai[i].egzaminas = generatePazymiai(1)[0];
