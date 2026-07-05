@@ -56,3 +56,14 @@ void sortStudentai(std::vector<studentas> &studentai, char sortBy)
     std::chrono::duration<double> elapsed = end - start;
     std::cout << "Rikiavimas užtruko: " << elapsed.count() << " sekundžių.\n";
 }
+
+splitResult splitStudentai(const std::vector<studentas> &studentai)
+{
+    splitResult result;
+
+    std::partition_copy(studentai.begin(), studentai.end(),
+        std::back_inserter(result.kietiakai), std::back_inserter(result.vargsiukai),
+        [](const studentas &s) { return s.galutinisVid >= 5.0; });
+
+    return result;
+}

@@ -11,6 +11,7 @@ int main()
     char sortChoice {};
     char outputChoice {};
     std::vector<studentas> studentaiVector {};
+    splitResult result {};
     std::string inputFileName {};
     std::string outputFileName {};
     try

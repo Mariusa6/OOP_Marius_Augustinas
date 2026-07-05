@@ -19,6 +19,12 @@ struct studentas
     double galutinisMed {};
 };
 
+struct splitResult
+{
+    std::vector<studentas> kietiakai;
+    std::vector<studentas> vargsiukai;
+};
+
 const int minPazymys{1};
 const int maxPazymys{10};
 
@@ -75,6 +81,7 @@ void outputStudentai(const std::vector<studentas> &studentai, char choice);
 
 // Sorting functions
 void sortStudentai(std::vector<studentas> &studentai, char sortChoice);
+splitResult splitStudentai(const std::vector<studentas> &studentai);
 
 // Utility functions
 bool isAllLetters(const std::string &input);
