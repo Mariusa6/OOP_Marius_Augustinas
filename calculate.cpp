@@ -57,13 +57,22 @@ void sortStudentai(std::vector<studentas> &studentai, char sortBy)
     std::cout << "Rikiavimas užtruko: " << elapsed.count() << " sekundžių.\n";
 }
 
-splitResult splitStudentai(const std::vector<studentas> &studentai)
+splitResult splitStudentai(const std::vector<studentas> &studentai, char sortBy)
 {
     splitResult result;
 
     std::partition_copy(studentai.begin(), studentai.end(),
         std::back_inserter(result.kietiakai), std::back_inserter(result.vargsiukai),
-        [](const studentas &s) { return s.galutinisVid >= 5.0; });
+        [sortBy](const studentas &s) {
+            switch (sortBy) {
+                case '3':
+                    return s.galutinisVid >= 5.0;
+                case '4':
+                    return s.galutinisMed >= 5.0;
+                default:
+                    return false;
+            }
+        });
 
     return result;
 }

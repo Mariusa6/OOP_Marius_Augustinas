@@ -24,15 +24,23 @@ int main()
                 case '1':
                     studentaiVector = enterStudentaiVector();
                     calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
+                    sortChoice = askSortBy();
+                    sortStudentai(studentaiVector, sortChoice);
+                    result = splitStudentai(studentaiVector, sortChoice);
                     outputChoice = askOutputChoice();
-                    outputStudentai(studentaiVector, outputChoice);
+                    outputStudentai(result.kietiakai, outputChoice);
+                    outputStudentai(result.vargsiukai, outputChoice);
                     break;
                 case '2':
                     n = enterNumberOfStudents();
                     studentaiVector = generateOnlyPazymiai(n);
                     calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
+                    sortChoice = askSortBy();
+                    sortStudentai(studentaiVector, sortChoice);
+                    result = splitStudentai(studentaiVector, sortChoice);
                     outputChoice = askOutputChoice();
-                    outputStudentai(studentaiVector, outputChoice);
+                    outputStudentai(result.kietiakai, outputChoice);
+                    outputStudentai(result.vargsiukai, outputChoice);
                     break;
                 case '3':
                     n = enterNumberOfStudents();
@@ -40,8 +48,10 @@ int main()
                     calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
                     sortChoice = askSortBy();
                     sortStudentai(studentaiVector, sortChoice);
+                    result = splitStudentai(studentaiVector, sortChoice);
                     outputChoice = askOutputChoice();
-                    outputStudentai(studentaiVector, outputChoice);
+                    outputStudentai(result.kietiakai, outputChoice);
+                    outputStudentai(result.vargsiukai, outputChoice);
                     break;
                 case '4':
                     inputFileName = enterFileName();
@@ -49,8 +59,10 @@ int main()
                     calculateGalutinisVector(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
                     sortChoice = askSortBy();
                     sortStudentai(studentaiVector, sortChoice);
+                    result = splitStudentai(studentaiVector, sortChoice);
                     outputChoice = askOutputChoice();
-                    outputStudentai(studentaiVector, outputChoice);
+                    outputStudentai(result.kietiakai, outputChoice);
+                    outputStudentai(result.vargsiukai, outputChoice);
                     break;
                 case '5':
                     studentaiVector = generateStudentai(enterNumberOfStudents());
