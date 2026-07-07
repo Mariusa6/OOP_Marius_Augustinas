@@ -27,4 +27,14 @@ void testData(int n)
     auto end2 = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed2 = end2 - start2;
     std::cout << n << " Studentų skirstymas į kietiakai ir vargsiukai užtruko: " << elapsed2.count() << " sekundžių.\n";
+    auto start3 = std::chrono::high_resolution_clock::now();
+    writeStudentaiListToFile(result.kietiakai, "testkietiakai" + std::to_string(n) + ".txt");
+    auto end3 = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed3 = end3 - start3;
+    std::cout << n << " Kietiakai failo generavimas užtruko: " << elapsed3.count() << " sekundžių.\n";
+    auto start4 = std::chrono::high_resolution_clock::now();
+    writeStudentaiListToFile(result.vargsiukai, "testvargsiukai" + std::to_string(n) + ".txt");
+    auto end4 = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed4 = end4 - start4;
+    std::cout << n << " Vargsiukai failo generavimas užtruko: " << elapsed4.count() << " sekundžių.\n";
 }
