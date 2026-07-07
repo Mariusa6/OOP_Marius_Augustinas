@@ -1,32 +1,92 @@
 # Studentų Informacinė Sistema OOP_Marius_Augustinas
 VU ISI Objektinio programavimo kurso laboratoriniai darbai
 
-v0.3 — C++ programa, skirta studentų informacijos įvedimui, saugojimui, galutinio pažymio skaičiavimui, rikiavimui, įrašymui į failą ir rezultatų išvedimui pasirinktu formatu (konsolė arba failas). Versijoje v0.3 kodas reorganizuotas į kelis logiškai atskirus modulius (*.h / *.cpp), o klaidų valdymas perkeltas į išimčių (`try`/`catch`) mechanizmą.
+v0.4 — C++ programa, skirta studentų informacijos įvedimui, saugojimui, galutinio pažymio skaičiavimui, rikiavimui, skirstymui į kategorijas ir įrašymui į failus. Versijoje v0.4 pridėtas studentų skirstymas į dvi grupes pagal galutinį balą, atskiras failų generavimo įrankis, bei dviejų nepriklausomų testavimo funkcijų spartos analizė su išmatuotais rezultatais.
+
+---
 
 ## Testavimo rezultatai
 
-Testavimas atliktas po tris kartus kiekvienam failui:
-- `studentai10000.txt` nuskaitymas truko vidutiniškai 0,053496 s, rikiavimas truko vidutiniškai 0,038939 s
-- `studentai100000.txt` nuskaitymas truko vidutiniškai 0,527913 s, rikiavimas truko vidutiniškai 0,373894 s
-- `studentai1000000.txt` nuskaitymas truko vidutiniškai 2,77334 s, rikiavimas truko vidutiniškai 4,61421 s
+### 1 tyrimas — failų kūrimas (`testGenerateStudentai`)
+
+> Matuojama tik failo rašymo trukmė, be duomenų generavimo. Nenaudojami anksčiau sukurti failai.
+
+| Įrašų skaičius | Failo kūrimo vidurkis (s) |
+|---|---|
+| 1 000 | 0.0070691 |
+| 10 000 | 0.0393296 |
+| 100 000 | 0.4774490 |
+| 1 000 000 | 6.5384967 |
+| 10 000 000 | 85.9562000 |
+
+![1 tyrimo 1 bandymo rezultatai](docs/tyrimas1_1.png)
+*1 pav. 1 Tyrimo rezultatai*
+
+![1 tyrimo 2 bandymo rezultatai](docs/tyrimas1_2.png)
+*2 pav. 1 Tyrimo rezultatai*
+
+![1 tyrimo 3 bandymo rezultatai](docs/tyrimas1_3.png)
+*3 pav. 1 Tyrimo rezultatai*
+
+---
+
+### 2 tyrimas — duomenų apdorojimas (`testData`)
+
+> Naudojami anksčiau sugeneruoti failai. Matuojami atskiri žingsniai ir bendra trukmė.
+
+| Įrašų skaičius | Nuskaitymas (s) | Skirstymas (s) | Kietiakai rašymas (s) | Vargsiukai rašymas (s) | Visa programa (s) |
+|---|---|---|---|---|---|
+| 1 000 | 0.0160112 | 0.0016176 | 0.0043916 | 0.0049405 | 0.0496385 |
+| 10 000 | 0.0666763 | 0.0073535 | 0.0212923 | 0.0174013 | 0.1499477 |
+| 100 000 | 0.4120767 | 0.0702424 | 0.1670093 | 0.1166451 | 1.1820133 |
+| 1 000 000 | 4.4514300 | 0.8410647 | 3.0478567 | 2.1807433 | 16.9502000 |
+| 10 000 000 | 57.2869333 | 10.1867167 | 49.1233667 | 32.2600667 | 220.1593333 |
+
+![2 tyrimo 1 bandymo rezultatai](docs/tyrimas2_1.png)
+*1 pav. 2 Tyrimo rezultatai*
+
+![2 tyrimo 1 bandymo rezultatai](docs/tyrimas2_2.png)
+*1 pav. 2 Tyrimo rezultatai*
+
+![2 tyrimo 2 bandymo rezultatai](docs/tyrimas2_3.png)
+*1 pav. 2 Tyrimo rezultatai*
+
+![2 tyrimo 2 bandymo rezultatai](docs/tyrimas2_4.png)
+*1 pav. 2 Tyrimo rezultatai*
+
+![2 tyrimo 3 bandymo rezultatai](docs/tyrimas2_5.png)
+*1 pav. 2 Tyrimo rezultatai*
+
+![2 tyrimo 3 bandymo rezultatai](docs/tyrimas2_6.png)
+*1 pav. 2 Tyrimo rezultatai*
+
+---
 
 ## Failų struktūra
+
 ```
 .
 ├── LICENSE
 ├── README.md
-├── main.h          # Bendra antraštė: struct studentas, konstantos, visos funkcijų deklaracijos
-├── mainVector.cpp  # Pagrindinis programos failas (vektorinė realizacija)
-├── menu.h / menu.cpp         # Meniu ir pasirinkimų klausimo funkcijos
-├── enter.h / enter.cpp       # Rankinio studentų duomenų įvedimo funkcijos
-├── generate.h / generate.cpp # Studentų ir pažymių generavimo funkcijos
-├── file.h / file.cpp         # Failo skaitymo ir rašymo funkcijos
-├── calculate.h / calculate.cpp # Galutinio pažymio skaičiavimo ir rikiavimo funkcijos
-├── output.h / output.cpp     # Rezultatų išvesties nukreipimas (konsolė / failas)
-└── print.h / print.cpp       # Spausdinimo į konsolę funkcijos
+├── data/                       # Sugeneruoti testiniai failai (archyvas)
+│   ├── studentai1000.txt
+│   ├── studentai10000.txt
+│   ├── studentai100000.txt
+│   ├── studentai1000000.txt
+│   └── studentai10000000.txt
+├── main.h            # Bendra antraštė: struktūros, konstantos, funkcijų deklaracijos
+├── mainVector.cpp    # Pagrindinis programos failas
+├── menu.h / menu.cpp           # Meniu ir pasirinkimų funkcijos
+├── enter.h / enter.cpp         # Rankinio įvedimo funkcijos
+├── generate.h / generate.cpp   # Studentų ir pažymių generavimo funkcijos
+├── file.h / file.cpp           # Failo skaitymo ir rašymo funkcijos
+├── calculate.h / calculate.cpp # Skaičiavimo, rikiavimo ir skirstymo funkcijos
+├── output.h / output.cpp       # Išvesties nukreipimo funkcija
+├── print.h / print.cpp         # Spausdinimo į konsolę funkcijos
+└── test.h / test.cpp           # Spartos testavimo funkcijos
 ```
 
-Kiekvienas `*.cpp` failas turi savo `*.h` antraštinį failą su atitinkamomis `#include` direktyvomis, kuris yra prijungtas prie bendro `main.h`. Visos struktūros, konstantos ir funkcijų deklaracijos sutelktos `main.h`, kad kiekvienas modulis galėtų jas matyti nekartojant deklaracijų.
+---
 
 ## Duomenų struktūros
 
@@ -39,10 +99,17 @@ Saugo vieno studento informaciją:
 - `galutinisVid` — galutinis pažymys, skaičiuotas pagal vidurkį
 - `galutinisMed` — galutinis pažymys, skaičiuotas pagal medianą
 
+### `splitResult` *(nauja v0.4)*
+Saugo studentų skirstymo į dvi grupes rezultatą:
+- `kietiakai` — studentai, kurių `galutinisMed >= 5.0`
+- `vargsiukai` — studentai, kurių `galutinisMed < 5.0`
+
 ### Konstantos (`main.h`)
-- `minPazymys` (1) ir `maxPazymys` (10) — pažymių ribos, naudojamos visose įvesties, generavimo ir failo validavimo funkcijose, kad ribos būtų valdomos vienoje vietoje
-- `namuDarbaiSvertis` (0.4) ir `egzaminasSvertis` (0.6) — galutinio pažymio skaičiavimo svoriai
-- `lithuanianNames`, `lithuanianSurnames` — vardų ir pavardžių sąrašai, naudojami generavimo funkcijose
+- `NUMBER_OF_PAZYMYS` (15) — fiksuotas namų darbų skaičius generavimo ir failo rašymo funkcijose
+- `minPazymys` (1) ir `maxPazymys` (10) — pažymių ribos
+- `namuDarbaiSvertis` (0.4) ir `egzaminasSvertis` (0.6) — galutinio pažymio svoriai
+
+---
 
 ## Programos veikimas
 
@@ -50,130 +117,154 @@ Saugo vieno studento informaciją:
 Programa pradedama `main()` funkcijoje (`mainVector.cpp`):
 - Nustatomas konsolės kodavimas į UTF-8 (`SetConsoleOutputCP`, `SetConsoleCP`)
 - Išvedamas sveikinimo pranešimas
-- Vartotojui pateikiamas meniu
-- Visas pagrindinis veiksmų blokas apgaubtas `try`/`catch` bloku — bet kuri programos dalis (skaičiavimas, failo skaitymas/rašymas, spausdinimas, išvesties pasirinkimas) gali saugiai išmesti išimtį, kuri sugaunama vienoje vietoje
+- Vartotojui pateikiamas meniu cikle (`while(menuLoop)`) — programa nesibaigia po vieno veiksmo, kol nepasirenkama `8`
+- Visas veiksmų blokas apgaubtas `try`/`catch(const std::exception&)` bloku
+
+![Programos paleidimo ekranas](docs/paleidimas.png)
+*4 pav. Programos paleidimo ir meniu vaizdas*
 
 ### 2. Meniu pasirinkimai — `askMenuChoice()`
 - `1` — Įvesti studentus ranka
-- `2` — Generuoti tik pažymius (vardai ir pavardės įvedami rankiniu būdu)
+- `2` — Generuoti tik pažymius (vardai įvedami rankiniu būdu)
 - `3` — Generuoti studentų vardus ir pažymius automatiškai
 - `4` — Nuskaityti studentus iš failo
-- `5` — Baigti darbą
+- `5` — Generuoti studentų failą (tik failo sukūrimui, be apdorojimo)
+- `6` — Failų generavimo spartos testavimas (1 tyrimas)
+- `7` — Duomenų apdorojimo spartos testavimas (2 tyrimas)
+- `8` — Baigti darbą
 
-### 3. Studentų įvedimas
-- `enterStudentaiVector()` — kaupia studentus į vektorių, po kiekvieno klausia, ar pridėti dar vieną (`y/n`)
-- `enterStudentas(n)` — įveda vieno studento duomenis kviesdama pagalbines funkcijas:
-  - `enterName(n)` / `enterSurname(n)` — įveda vardą / pavardę (tik raidės, tikrinama `isAllLetters`)
-  - `enterNumberOfPazymys(n)` — įveda namų darbų skaičių (≥ 0)
-  - `enterPazymiai(n, m)` — įveda kiekvieno namų darbo pažymį (`minPazymys`–`maxPazymys`)
-  - `enterEgzaminas(n)` — įveda egzamino pažymį (`minPazymys`–`maxPazymys`)
+### 3. Studentų įvedimas — `enter.cpp`
+- `enterStudentaiVector()` — kaupia studentus į vektorių, po kiekvieno klausia `y/n`
+- `enterStudentas(n)` — įveda vieno studento duomenis:
+  - `enterName(n)` / `enterSurname(n)` — tik raidės (`isAllLetters`)
+  - `enterNumberOfPazymys(n)` — namų darbų skaičius (≥ 0)
+  - `enterPazymiai(n, m)` — pažymiai (`minPazymys`–`maxPazymys`)
+  - `enterEgzaminas(n)` — egzamino pažymys (`minPazymys`–`maxPazymys`)
 
-### 4. Studentų generavimas — `generate.cpp`
-- `generateStudentai(n)` — generuoja pilnus studentų duomenis (vardą, pavardę ir pažymius)
+### 4. Studentų ir failų generavimas — `generate.cpp`
+
+- `generateStudentai(n)` — generuoja `n` studentų su šabloniniais vardais ir atsitiktiniais pažymiais:
+  - Vardai formuojami kaip `VardasNR1 PavardeNR1`, `VardasNR2 PavardeNR2` ir t.t.
+  - Kiekvienas studentas turi lygiai `NUMBER_OF_PAZYMYS` (15) namų darbų pažymių
+  - Prieš ciklą kviečiamas `studentai.reserve(n)` — išvengiama perteklinių atminties perskirstymų
+  - Naudojamas vienas bendras `std::mt19937` generatorius (`getRng()`)
+
 - `generateOnlyPazymiai(n)` — vardai ir pavardės įvedami rankiniu būdu, pažymiai generuojami
-- Vardai ir pavardės parenkamos iš lietuviškų vardų sąrašų (`lithuanianNames`, `lithuanianSurnames`)
-- Pažymiai generuojami atsitiktinai naudojant `std::mt19937` su `std::uniform_int_distribution`
-- **Nauja v0.3:** atsitiktinių skaičių generatorius (`std::mt19937`) sukuriamas vieną kartą per programos veikimą per `getRng()` (statinis objektas, grąžinamas per nuorodą) ir pakartotinai naudojamas visose generavimo funkcijose, vietoj naujo `std::random_device` sukūrimo kiekvienam kvietimui — tai pagreitina generavimą didelėms studentų imtims ir užtikrina, kad atsitiktiniai skaičiai tarp skirtingų generavimo funkcijų nesutaptų
 
-### 5. Failo skaitymas ir rašymas — `file.cpp`
+### 5. Failų skaitymas ir rašymas — `file.cpp`
 
 **Skaitymas:**
-- `enterFileName()` — prašo vartotojo įvesti įvesties failo pavadinimą (turi turėti `.txt` plėtinį)
+- `enterFileName()` — tikrina `.txt` plėtinį
 - `readStudentaiFromFile(filename)` — nuskaito studentus iš `.txt` failo:
-  - Iš antraštės eilutės nustato namų darbų stulpelių skaičių (pagal `ND` žymėjimą)
-  - Nuskaito kiekvieną studentą: vardą, pavardę, namų darbų pažymius ir egzamino pažymį
-  - **Tikrina, ar failas egzistuoja ir pavyko jį atidaryti** (`std::ifstream::is_open()`); jei ne — išmeta `std::runtime_error` su failo pavadinimu
-  - Tikrina, ar failas nėra tuščias arba sugadintas (trūksta antraštės eilutės)
-  - Tikrina kiekvieną eilutę: ar yra vardas ir pavardė, ar yra visi reikiami namų darbų ir egzamino pažymiai, ar jie patenka į `minPazymys`–`maxPazymys` intervalą — visais klaidos atvejais išmetama `std::runtime_error` su konkrečios eilutės numeriu ir lietuvišku klaidos pranešimu
+  - Iš antraštės eilutės automatiškai nustato namų darbų stulpelių skaičių pagal `ND` žymėjimą
+  - Tikrina kiekvieną eilutę ir pažymių ribas — klaidos atveju meta `std::runtime_error`
 
-**Rašymas:**
-- `enterOutputFileName()` — prašo vartotojo įvesti išvesties failo pavadinimą (turi turėti `.txt` plėtinį)
-- `writeStudentaiToFile(studentai, filename)` — įrašo studentų sąrašą su abiem galutiniais pažymiais į `.txt` failą lentelės formatu; jei failo sukurti nepavyksta, išmetama `std::runtime_error`
+**Rašymas (du formatai):**
+- `writeStudentaiToFile(studentai, filename)` — išvesties formatas su galutiniais balais (Vid. ir Med.)
+- `writeStudentaiListToFile(studentai, filename)` — generavimo formatas su visais namų darbų pažymiais ir egzaminu; suderinamas su `readStudentaiFromFile` skaitymui
 
-### 6. Galutinio pažymio skaičiavimas
-Galutinis pažymys skaičiuojamas pagal formulę:
+Sugeneruoto failo formato pavyzdys:
+```
+Vardas                   Pavardė                       ND1       ND2  ...  Egzaminas
+VardasNR1                PavardeNR1                      7         3  ...          5
+VardasNR2                PavardeNR2                      9         1  ...          8
+```
+
+### 6. Galutinio pažymio skaičiavimas — `calculate.cpp`
 ```
 galutinis = 0.4 × namų_darbų_vidurkis_arba_mediana + 0.6 × egzamino_pažymys
 ```
-Abu metodai skaičiuojami vienu metu ir saugomi atskiruose laukuose:
-- `calculateGalutinisAverage()` — skaičiuoja naudojant **vidurkį** → `galutinisVid`
-- `calculateGalutinisMedian()` — skaičiuoja naudojant **medianą** → `galutinisMed`
-- `calculateGalutinisVector()` — taiko abu skaičiavimus visiems studentams; jei sąrašas tuščias, išmeta `std::runtime_error`
+- `calculateGalutinisAverage()` → `galutinisVid`
+- `calculateGalutinisMedian()` → `galutinisMed`
+- `calculateGalutinisVector()` — taiko abu visiems studentams; jei sąrašas tuščias, meta `std::runtime_error`
 
-### 7. Rikiavimas
-Po skaičiavimo vartotojas gali pasirinkti rikiavimo kriterijų — `askSortBy()`:
+### 7. Rikiavimas — `sortStudentai()`
 - `1` — pagal vardą (abėcėliškai)
 - `2` — pagal pavardę (abėcėliškai)
-- `3` — pagal galutinį įvertinimą (vidurkis, mažėjančia tvarka)
-- `4` — pagal galutinį įvertinimą (mediana, mažėjančia tvarka)
+- `3` — pagal galutinį (vidurkis, mažėjančia tvarka)
+- `4` — pagal galutinį (mediana, mažėjančia tvarka)
 
-Rikiavimas atliekamas `sortStudentai()` naudojant `std::sort` su lambda funkcija.
+### 8. Studentų skirstymas į kategorijas — `splitStudentai()` *(nauja v0.4)*
 
-### 8. Rezultatų išvedimas — *(nauja v0.3)*
-Anksčiau (v0.2) rezultatas visada buvo spausdinamas tik į konsolę. Versijoje v0.3 vartotojas po skaičiavimo (ir, jei taikoma, rikiavimo) renkasi išvesties formatą — `askOutputChoice()`:
-- `1` — Išvesti į konsolę
-- `2` — Išvesti į failą
+Naudojamas `std::partition_copy` — vienas perėjimas per vektorių, originalas nekeičiamas:
 
-Pasirinkimas perduodamas į naują `outputStudentai(studentai, choice)` funkciją (`output.cpp`), kuri:
-- pasirinkus `1` — kviečia `printStudentaiVector()` (`print.cpp`)
-- pasirinkus `2` — paklausia išvesties failo pavadinimo (`enterOutputFileName()`) ir kviečia `writeStudentaiToFile()` (`file.cpp`)
-- esant nenumatytam pasirinkimui — išmeta `std::runtime_error("Neteisingas pasirinkimas išvesties formatui.")`
-
-Konsolės spausdinimo formatas (`print.cpp`):
 ```
-Vardas               Pavardė              Galutinis (Vid.)     Galutinis (Med.)
------------------------------------------------------------------------
-Tomas                Kazlauskas           7.20                 7.00
-Aistė                Petrauskaitė         8.60                 8.40
+galutinisMed >= 5.0  →  result.kietiakai
+galutinisMed  < 5.0  →  result.vargsiukai
 ```
 
-## Klaidų / išimčių valdymas (Exception Handling)
+Grąžinamas `splitResult` — struktūra su dviem vektoriais. Rezultatai išvedami į du atskirus failus arba konsolę (`outputStudentai` kviečiamas du kartus — atskirai kietiakiams ir vargsiukams).
 
-Versijoje v0.3 visos pagrindinio veikimo grandinės klaidos valdomos `std::runtime_error` išimtimis, sugaunamos viename `try`/`catch(const std::exception&)` bloke `mainVector.cpp` faile. Pagrindiniai atvejai:
+### 9. Rezultatų išvedimas — `output.cpp`
+- `1` — spausdinama į konsolę (`printStudentaiVector`)
+- `2` — rašoma į failą (klausiamas failo pavadinimas, kviečiama `writeStudentaiToFile`)
+
+### 10. Spartos testavimas — `test.cpp` *(nauja v0.4)*
+
+**1 tyrimas — `testGenerateStudentai(n)`:**
+- Sugeneruoja `n` studentų į vektorių (`generateStudentai`)
+- Matuoja **tik** `writeStudentaiListToFile` trukmę — failo sukūrimą ir uždarymą
+- Po rašymo vektorius išvalomas (`studentai.clear()`)
+- Kviečiama meniu pasirinkimu `6` penkis kartus iš eilės (1 000 → 10 000 000)
+
+**2 tyrimas — `testData(n)`:**
+- Atidaro anksčiau sugeneruotą failą `data/studentaiN.txt`
+- Atskirai matuoja kiekvieną žingsnį:
+  1. Failo nuskaitymas (`readStudentaiFromFile`)
+  2. Galutinių balų skaičiavimas ir rikiavimas pagal medianą
+  3. Skirstymas į dvi grupes (`splitStudentai`)
+  4. Kietiakai rašymas į `testkietiakaiN.txt`
+  5. Vargsiukai rašymas į `testvargsiukaiN.txt`
+- Matuoja bendrą veikimo laiką nuo pradžios iki pabaigos
+- Kviečiama meniu pasirinkimu `7` penkis kartus iš eilės (1 000 → 10 000 000)
+
+---
+
+## Klaidų / išimčių valdymas
 
 | Vieta | Sąlyga | Pranešimas |
 |---|---|---|
-| `readStudentaiFromFile` | Failas neegzistuoja arba nepavyko atidaryti | „Nepavyko atidaryti failo: ..." |
+| `readStudentaiFromFile` | Failas neegzistuoja / nepavyko atidaryti | „Nepavyko atidaryti failo: ..." |
 | `readStudentaiFromFile` | Failas tuščias / be antraštės | „Failas tuščias arba sugadintas: ..." |
 | `readStudentaiFromFile` | Trūksta vardo/pavardės/pažymio eilutėje | „Eilutėje N trūksta ..." |
 | `readStudentaiFromFile` | Pažymys už `minPazymys`–`maxPazymys` ribų | „Eilutėje N pažymys už ribų (1-10): ..." |
 | `writeStudentaiToFile` | Nepavyko sukurti išvesties failo | „Nepavyko sukurti failo: ..." |
+| `writeStudentaiListToFile` | Nepavyko sukurti išvesties failo | „Nepavyko sukurti failo: ..." |
 | `calculateGalutinisVector` | Tuščias studentų sąrašas | „Studentų sąrašas tuščias — nėra ką skaičiuoti." |
 | `printStudentaiVector` | Tuščias studentų sąrašas | „Studentų sąrašas tuščias — nėra ko spausdinti." |
 | `outputStudentai` | Neteisingas išvesties formato pasirinkimas | „Neteisingas pasirinkimas išvesties formatui." |
 
-Visi pranešimai pateikiami lietuvių kalba, o klaidos `main()` lygmenyje gaudomos taip:
-```cpp
-catch (const std::exception& e)
-{
-    std::cerr << "Klaida: " << e.what() << std::endl;
-    return 1;
-}
-```
+---
 
-**Pastaba dėl interaktyvios įvesties:** sąsajos su vartotoju funkcijos (`enterName`, `enterSurname`, `enterPazymys`, `enterEgzaminas`, `enterNumberOfStudents` ir kt.) validuoja įvestį naudojant srauto būsenos tikrinimą (`std::cin.fail()` ir `while` ciklą), o ne `throw`/`catch` mechanizmą — vartotojui tiesiog pakartotinai parodomas raginimas, kol įvestis tampa teisinga. Tuo tarpu duomenų, gaunamų **iš failo**, validacija (`readStudentaiFromFile`) realizuota per išimčių mechanizmą, nes ten klaidos negalima ištaisyti vietoje — reikia nutraukti skaitymą ir informuoti vartotoją.
+## Įvesties validacija
 
-## Įvesties validacija (apžvalga)
-- Vardas / pavardė turi ne raides → `isAllLetters` patikra, kartojama įvestis
-- Pažymys ne tarp `minPazymys` ir `maxPazymys` → kartojama įvestis (interaktyviai) arba `std::runtime_error` (skaitant iš failo)
+- Vardas / pavardė turi ne raides → `isAllLetters`, kartojama įvestis
+- Pažymys ne tarp `minPazymys` ir `maxPazymys` → kartojama įvestis arba `std::runtime_error` (iš failo)
 - Namų darbų skaičius neigiamas → kartojama įvestis
-- Failo pavadinimas neturi `.txt` plėtinio → kartojama įvestis
-- Pasirinkimas `y/n`, meniu numeris ar išvesties formatas netinkamas → kartojama įvestis arba `std::runtime_error`
+- Failo pavadinimas be `.txt` plėtinio → kartojama įvestis
+- Meniu pasirinkimas už ribų → kartojama įvestis
+
+---
 
 ## Kompiliavimas
+
 ```bash
-g++ -std=c++17 mainVector.cpp menu.cpp enter.cpp generate.cpp file.cpp calculate.cpp output.cpp print.cpp -o programa
+g++ -std=c++17 mainVector.cpp menu.cpp enter.cpp generate.cpp file.cpp calculate.cpp output.cpp print.cpp test.cpp -o programa
 ./programa
 ```
 
 > **Pastaba:** programa naudoja `<windows.h>`, todėl skirta Windows operacinei sistemai.
 
-## Pakeitimai nuo v0.2 → v0.3
+---
 
-- Kodas reorganizuotas į atskirus modulius — kiekviena funkcinė sritis (meniu, įvedimas, generavimas, failai, skaičiavimas, išvestis, spausdinimas) turi savo `*.h`/`*.cpp` porą
-- Pridėtas naujas modulis `output.h`/`output.cpp` su `outputStudentai()` — leidžia vartotojui po kiekvieno scenarijaus (rankinis įvedimas, generavimas, skaitymas iš failo) pasirinkti, ar rezultatą rodyti konsolėje, ar rašyti į failą (`askOutputChoice()` meniu funkcijoje)
-- Klaidų valdymas perkeltas į `std::runtime_error` išimčių mechanizmą: tikrinama, ar failą pavyko atidaryti / sukurti, ar studentų sąrašas netuščias, ar pasirinkimas teisingas; visos klaidos sugaunamos viename `try`/`catch` bloke `main()` viduje
-- Magiški skaičiai `1` ir `10` pakeisti vardinėmis konstantomis `minPazymys` ir `maxPazymys` (`main.h`), naudojamomis visur, kur tikrinamos pažymio ribos
-- Atsitiktinių skaičių generavimas optimizuotas — visoms `generate.cpp` funkcijoms naudojamas vienas bendras, vieną kartą inicializuotas `std::mt19937` generatorius (`getRng()`) vietoj naujo `std::random_device` kiekvienam kvietimui
-- Pataisyta antraštinio failo apsaugos (header guard) rašybos klaida (`calculate.h`)
-- Ciklai per `std::vector` pakeisti į range-based `for` (`for (auto &s : studentai)`), pašalinant signed/unsigned palyginimo įspėjimus
+## Pakeitimai nuo v0.3 → v0.4
+
+- Pridėtas `splitStudentai()` — naudoja `std::partition_copy` studentams skirstyti į `kietiakai` (≥ 5.0) ir `vargsiukai` (< 5.0) pagal `galutinisMed`; grąžina `struct splitResult`
+- Pridėtas `struct splitResult` su dviem vektoriais (`main.h`)
+- Meniu išplėstas iki 8 pasirinkimų: pridėti `5` (generuoti failą), `6` (1 tyrimas), `7` (2 tyrimas)
+- Pridėtas `test.h`/`test.cpp` su dviem testavimo funkcijomis: `testGenerateStudentai(n)` ir `testData(n)`
+- `testData(n)` matuoja 4 atskirus žingsnius ir bendrą trukmę, naudoja failus iš `data/` aplanko
+- `generateStudentai(n)` — šabloniniai vardai `VardasNRi`/`PavardeNRi`, fiksuotas `NUMBER_OF_PAZYMYS` namų darbų skaičius, `studentai.reserve(n)` prieš ciklą
+- `writeStudentaiListToFile()` — pilno įrašų formato rašymas, suderinamas su `readStudentaiFromFile()` skaitymui
+- Pagrindinis ciklas `main()` pakeistas iš vienkartinio `switch` į `while(menuLoop)` — programa leidžia atlikti kelis veiksmus be paleidimo iš naujo
+- Po kiekvieno scenarijaus `splitStudentai()` ir `outputStudentai()` kviečiamas du kartus — atskirai kietiakiams ir vargsiukams
