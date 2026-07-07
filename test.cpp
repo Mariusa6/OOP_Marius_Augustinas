@@ -37,4 +37,6 @@ void testData(int n)
     auto end4 = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed4 = end4 - start4;
     std::cout << n << " Vargsiukai failo generavimas užtruko: " << elapsed4.count() << " sekundžių.\n";
+    std::chrono::duration<double> totalElapsed = elapsed + elapsed2 + elapsed3 + elapsed4;
+    std::cout << n << " Studentų viso testavimo užtruko: " << totalElapsed.count() << " sekundžių.\n";
 }
