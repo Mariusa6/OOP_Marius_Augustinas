@@ -60,7 +60,7 @@ splitResult splitStudentai(const std::vector<studentas> &studentai)
     std::partition_copy(studentai.begin(), studentai.end(),
         std::back_inserter(result.kietiakai), std::back_inserter(result.vargsiukai),
         [](const studentas &s) {
-            return s.galutinisVid >= 5.0;
+            return s.galutinisMed >= 5.0;
         });
 
     return result;
