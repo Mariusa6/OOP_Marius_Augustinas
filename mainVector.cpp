@@ -76,6 +76,11 @@ int main()
                     testGenerateStudentai(10000000);
                     break;
                 case '7':
+                    testData(1000);
+                    testData(10000);
+                    testData(100000);
+                    testData(1000000);
+                    testData(10000000);
                     break;
                 case '8':
                     std::cout << "Programa baigta.\n";

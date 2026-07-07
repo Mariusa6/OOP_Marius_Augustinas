@@ -85,6 +85,7 @@ splitResult splitStudentai(const std::vector<studentas> &studentai);
 
 // Testing functions
 void testGenerateStudentai(int n);
+void testData(int n);
 
 // Utility functions
 bool isAllLetters(const std::string &input);
