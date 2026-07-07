@@ -15,18 +15,21 @@ void testGenerateStudentai(int n)
 void testData(int n)
 {
     std::vector<studentas> studentai {};
+    auto startTotal = std::chrono::high_resolution_clock::now();
+    std::cout << "Pradedamas testavimas su " << n << " studentų duomenimis.\n";
+    std::cout << "------------------------------------------------------------\n";
     auto start = std::chrono::high_resolution_clock::now();
     studentai = readStudentaiFromFile("data/studentai" + std::to_string(n) + ".txt");
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = end - start;
-    std::cout << n << " Studentų failo skaitymas užtruko: " << elapsed.count() << " sekundžių.\n";
+    std::cout << n << " failo skaitymas užtruko: " << elapsed.count() << " sekundžių.\n";
     calculateGalutinisVector(studentai, namuDarbaiSvertis, egzaminasSvertis);
     sortStudentai(studentai, '4');
     auto start2 = std::chrono::high_resolution_clock::now();
     splitResult result = splitStudentai(studentai);
     auto end2 = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed2 = end2 - start2;
-    std::cout << n << " Studentų skirstymas į kietiakai ir vargsiukai užtruko: " << elapsed2.count() << " sekundžių.\n";
+    std::cout << n << " skirstymas į kietiakai ir vargsiukai užtruko: " << elapsed2.count() << " sekundžių.\n";
     auto start3 = std::chrono::high_resolution_clock::now();
     writeStudentaiListToFile(result.kietiakai, "testkietiakai" + std::to_string(n) + ".txt");
     auto end3 = std::chrono::high_resolution_clock::now();
@@ -36,7 +39,8 @@ void testData(int n)
     writeStudentaiListToFile(result.vargsiukai, "testvargsiukai" + std::to_string(n) + ".txt");
     auto end4 = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed4 = end4 - start4;
+    auto endTotal = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsedTotal = endTotal - startTotal;
     std::cout << n << " Vargsiukai failo generavimas užtruko: " << elapsed4.count() << " sekundžių.\n";
-    std::chrono::duration<double> totalElapsed = elapsed + elapsed2 + elapsed3 + elapsed4;
-    std::cout << n << " Studentų viso testavimo užtruko: " << totalElapsed.count() << " sekundžių.\n";
+    std::cout << n << " Visas testavimas užtruko: " << elapsedTotal.count() << " sekundžių.\n\n";
 }
