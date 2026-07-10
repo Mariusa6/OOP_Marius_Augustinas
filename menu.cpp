@@ -11,14 +11,14 @@ char askMenuChoice()
     std::cout << "5. Generuoti studentų failą\n";
     std::cout << "6. Studentų failų generavimo testavimas\n";
     std::cout << "7. Duomenų apdorojimo testavimas\n";
-    std::cout << "8. Baigti darbą\n";
+    std::cout << "0. Baigti darbą\n";
     std::cout << "Jūsų pasirinkimas: ";
     do
     {
         std::cin >> choice;
-        if (choice < '1' || choice > '8')
+        if (choice < '0' || choice > '7')
             std::cout << "Netinkama įvestis, bandykite dar kartą: ";
-    } while (choice < '1' || choice > '8');
+    } while (choice < '0' || choice > '7');
     return choice;
 }
 

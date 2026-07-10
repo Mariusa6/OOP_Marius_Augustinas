@@ -42,3 +42,6 @@
 
 # text files
 *.txt
+
+# json files
+*.json

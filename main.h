@@ -4,6 +4,8 @@
 #include <iostream>     // cout, cin
 #include <string>       // string
 #include <vector>       // vector
+#include <list>         // list
+#include <deque>        // deque
 #include <windows.h>    // SetConsoleOutputCP, SetConsoleCP
 #include <exception>    // exception
 
@@ -19,10 +21,22 @@ struct studentas
     double galutinisMed {};
 };
 
-struct splitResult
+struct splitResultVector
 {
     std::vector<studentas> kietiakai;
     std::vector<studentas> vargsiukai;
+};
+
+struct splitResultList
+{
+    std::list<studentas> kietiakai;
+    std::list<studentas> vargsiukai;
+};
+
+struct splitResultDeque
+{
+    std::deque<studentas> kietiakai;
+    std::deque<studentas> vargsiukai;
 };
 
 const int minPazymys{1};
@@ -37,22 +51,26 @@ const double egzaminasSvertis{0.6};
 char askMenuChoice();
 
 // Generate functions
-std::vector<studentas> generateStudentai(int n);
-studentas* generateStudentaiArray(int n);
-std::vector<studentas> generateOnlyPazymiai(int n);
-studentas* generateOnlyPazymiaiArray(int n);
+std::vector<studentas> generateStudentaiVector(int n);
+std::list<studentas> generateStudentaiList(int n);
+std::deque<studentas> generateStudentaiDeque(int n);
+std::vector<studentas> generateOnlyPazymiaiVector(int n);
+std::list<studentas> generateOnlyPazymiaiList(int n);
+std::deque<studentas> generateOnlyPazymiaiDeque(int n);
 std::vector<int> generatePazymiai(int m);
 
 // Print functions
 void printWelcome();
 void printNameAsk();
-void printStudentaiArray(studentas* studentai, int n, char choice);
 void printStudentaiVector(const std::vector<studentas> &studentai);
+void printStudentaiList(const std::list<studentas> &studentai);
+void printStudentaiDeque(const std::deque<studentas> &studentai);
 
 // User input functions
 int enterNumberOfStudents();
-studentas* enterStudentaiArray(int &n);
 std::vector<studentas> enterStudentaiVector();
+std::list<studentas> enterStudentaiList();
+std::deque<studentas> enterStudentaiDeque();
 bool askIfMoreStudents();
 studentas enterStudentas(int n);
 std::string enterName(int n);
@@ -66,22 +84,35 @@ char askSortBy();
 char askOutputChoice();
 
 // Calculation functions
-void calculateGalutinisArray(char choice, studentas* studentai, int n, double namuDarbaiSvertis, double egzaminasSvertis);
-void calculateGalutinisVector(std::vector<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis);
+void calculateGalutinis(std::vector<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis);
+void calculateGalutinis(std::list<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis);
+void calculateGalutinis(std::deque<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis);
 double calculateGalutinisMedian(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);
 double calculateGalutinisAverage(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);
 
 // File handling functions
 std::string enterFileName();
-std::vector<studentas> readStudentaiFromFile(const std::string &filename);
+std::vector<studentas> readStudentaiFromFileVector(const std::string &filename);
+std::list<studentas> readStudentaiFromFileList(const std::string &filename);
+std::deque<studentas> readStudentaiFromFileDeque(const std::string &filename);
 std::string enterOutputFileName();
 void writeStudentaiToFile(const std::vector<studentas> &studentai, const std::string &filename);
+void writeStudentaiToFile(const std::list<studentas> &studentai, const std::string &filename);
+void writeStudentaiToFile(const std::deque<studentas> &studentai, const std::string &filename);
 void writeStudentaiListToFile(const std::vector<studentas> &studentai, const std::string &filename);
+void writeStudentaiListToFile(const std::list<studentas> &studentai, const std::string &filename);
+void writeStudentaiListToFile(const std::deque<studentas> &studentai, const std::string &filename);
 void outputStudentai(const std::vector<studentas> &studentai, char choice);
+void outputStudentai(const std::list<studentas> &studentai, char choice);
+void outputStudentai(const std::deque<studentas> &studentai, char choice);
 
 // Sorting functions
 void sortStudentai(std::vector<studentas> &studentai, char sortChoice);
-splitResult splitStudentai(const std::vector<studentas> &studentai);
+void sortStudentai(std::list<studentas> &studentai, char sortChoice);
+void sortStudentai(std::deque<studentas> &studentai, char sortChoice);
+splitResultVector splitStudentai(const std::vector<studentas> &studentai);
+splitResultList splitStudentai(const std::list<studentas> &studentai);
+splitResultDeque splitStudentai(const std::deque<studentas> &studentai);
 
 // Testing functions
 void testGenerateStudentai(int n);

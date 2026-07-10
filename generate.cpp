@@ -6,7 +6,7 @@ std::mt19937& getRng()
     return rng;
 }
 
-std::vector<studentas> generateStudentai(int n)
+std::vector<studentas> generateStudentaiVector(int n)
 {
     std::vector<studentas> studentai;
     studentai.reserve(n);
@@ -23,21 +23,7 @@ std::vector<studentas> generateStudentai(int n)
     return studentai;
 }
 
-studentas* generateStudentaiArray(int n)
-{
-    studentas* studentai = new studentas[n];
-    for (int i = 0; i < n; i++)
-    {
-        studentai[i].vardas = "VardasNR" + std::to_string(i + 1);
-        studentai[i].pavarde = "PavardeNR" + std::to_string(i + 1);
-        int m = NUMBER_OF_PAZYMYS;
-        studentai[i].namuDarbai = generatePazymiai(m);
-        studentai[i].egzaminas = generatePazymiai(1)[0];
-    }
-    return studentai;
-}
-
-std::vector<studentas> generateOnlyPazymiai(int n)
+std::vector<studentas> generateOnlyPazymiaiVector(int n)
 {
     std::vector<studentas> studentai;
     studentai.reserve(n);
@@ -50,20 +36,6 @@ std::vector<studentas> generateOnlyPazymiai(int n)
         s.namuDarbai = generatePazymiai(m);
         s.egzaminas = generatePazymiai(1)[0];
         studentai.push_back(s);
-    }
-    return studentai;
-}
-
-studentas* generateOnlyPazymiaiArray(int n)
-{
-    studentas* studentai = new studentas[n];
-    for (int i = 0; i < n; i++)
-    {
-        studentai[i].vardas = enterName(i + 1);
-        studentai[i].pavarde = enterSurname(i + 1);
-        int m = NUMBER_OF_PAZYMYS;
-        studentai[i].namuDarbai = generatePazymiai(m);
-        studentai[i].egzaminas = generatePazymiai(1)[0];
     }
     return studentai;
 }

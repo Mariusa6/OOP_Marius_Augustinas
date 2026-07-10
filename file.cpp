@@ -14,7 +14,7 @@ std::string enterFileName()
 }
 
 
-std::vector<studentas> readStudentaiFromFile(const std::string &filename)
+std::vector<studentas> readStudentaiFromFileVector(const std::string &filename)
 {
     std::vector<studentas> studentai;
     std::ifstream file(filename);

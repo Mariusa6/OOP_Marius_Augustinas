@@ -1,6 +1,6 @@
 #include "calculate.h"
 
-void calculateGalutinisVector(std::vector<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis)
+void calculateGalutinis(std::vector<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis)
 {
     if (studentai.empty())
         throw std::runtime_error("Studentų sąrašas tuščias — nėra ką skaičiuoti.");
@@ -53,9 +53,9 @@ void sortStudentai(std::vector<studentas> &studentai, char sortBy)
     });
 }
 
-splitResult splitStudentai(const std::vector<studentas> &studentai)
+splitResultVector splitStudentai(const std::vector<studentas> &studentai)
 {
-    splitResult result;
+    splitResultVector result;
 
     std::partition_copy(studentai.begin(), studentai.end(),
         std::back_inserter(result.kietiakai), std::back_inserter(result.vargsiukai),
