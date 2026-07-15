@@ -12,10 +12,22 @@ int main()
     char choice {};
     char sortChoice {};
     char outputChoice {};
+    char containerChoice {};
     std::vector<studentas> studentaiVector {};
     splitResult<std::vector<studentas>> resultVector {};
     try
     {
+        containerChoice = askContainerChoice();
+
+        if (containerChoice == '1')
+            std::vector<studentas> studentai {};
+
+        else if (containerChoice == '2')
+            std::list<studentas> studentai {};
+
+        else
+            std::deque<studentas> studentai {};
+            
         while(menuLoop)
         {
             choice = askMenuChoice();

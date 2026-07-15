@@ -63,6 +63,7 @@ int enterEgzaminas(int n);
 char askAverageOrMedian();
 char askSortBy();
 char askOutputChoice();
+char askContainerChoice();
 
 // Calculation functions
 double calculateGalutinisMedian(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);

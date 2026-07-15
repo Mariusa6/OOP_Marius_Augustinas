@@ -98,3 +98,22 @@ char askOutputChoice()
     } while (choice < '1' || choice > '2');
     return choice;
 }
+
+char askContainerChoice()
+{
+    char choice;
+    std::cout << "Pasirinkite konteinerį:\n"
+              << "1. vector\n"
+              << "2. list\n"
+              << "3. deque\n"
+              << "Jūsų pasirinkimas: ";
+    do
+    {
+        std::cin >> choice;
+        if (choice < '1' || choice > '3')
+            std::cout << "Netinkama įvestis, bandykite dar kartą: ";
+    } while (choice < '1' || choice > '3');
+    return choice;
+}
+
+
