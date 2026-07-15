@@ -1,4 +1,5 @@
 #include "test.h"
+#include "calculate.h"
 
 void testGenerateStudentai(int n)
 {
@@ -33,7 +34,7 @@ void testData(int n)
 
     auto start2 = std::chrono::high_resolution_clock::now();
 
-    splitResultVector result = splitStudentai(studentai);
+    splitResult<std::vector<studentas>> result = splitStudentai(studentai);
 
     auto end2 = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed2 = end2 - start2;

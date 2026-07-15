@@ -1,4 +1,5 @@
 #include "main.h"
+#include "calculate.h"
 
 int main()
 {
@@ -13,9 +14,9 @@ int main()
     std::vector<studentas> studentaiVector {};
     std::list<studentas> studentaiList {};
     std::deque<studentas> studentaiDeque {};
-    splitResultVector resultVector {};
-    splitResultList resultList {};
-    splitResultDeque resultDeque {};
+    splitResult<std::vector<studentas>> resultVector {};
+    splitResult<std::list<studentas>> resultList {};
+    splitResult<std::deque<studentas>> resultDeque {};
     std::string inputFileName {};
     std::string outputFileName {};
     try

@@ -21,22 +21,11 @@ struct studentas
     double galutinisMed {};
 };
 
-struct splitResultVector
+template<typename Container>
+struct splitResult
 {
-    std::vector<studentas> kietiakai;
-    std::vector<studentas> vargsiukai;
-};
-
-struct splitResultList
-{
-    std::list<studentas> kietiakai;
-    std::list<studentas> vargsiukai;
-};
-
-struct splitResultDeque
-{
-    std::deque<studentas> kietiakai;
-    std::deque<studentas> vargsiukai;
+    Container kietiakai;
+    Container vargsiukai;
 };
 
 const int minPazymys{1};
@@ -52,19 +41,13 @@ char askMenuChoice();
 
 // Generate functions
 std::vector<studentas> generateStudentaiVector(int n);
-std::list<studentas> generateStudentaiList(int n);
-std::deque<studentas> generateStudentaiDeque(int n);
 std::vector<studentas> generateOnlyPazymiaiVector(int n);
-std::list<studentas> generateOnlyPazymiaiList(int n);
-std::deque<studentas> generateOnlyPazymiaiDeque(int n);
 std::vector<int> generatePazymiai(int m);
 
 // Print functions
 void printWelcome();
 void printNameAsk();
 void printStudentaiVector(const std::vector<studentas> &studentai);
-void printStudentaiList(const std::list<studentas> &studentai);
-void printStudentaiDeque(const std::deque<studentas> &studentai);
 
 // User input functions
 int enterNumberOfStudents();
@@ -84,9 +67,6 @@ char askSortBy();
 char askOutputChoice();
 
 // Calculation functions
-void calculateGalutinis(std::vector<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis);
-void calculateGalutinis(std::list<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis);
-void calculateGalutinis(std::deque<studentas> &studentai, double namuDarbaiSvertis, double egzaminasSvertis);
 double calculateGalutinisMedian(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);
 double calculateGalutinisAverage(const studentas &s, double namuDarbaiSvertis, double egzaminasSvertis);
 
@@ -106,17 +86,10 @@ void outputStudentai(const std::vector<studentas> &studentai, char choice);
 void outputStudentai(const std::list<studentas> &studentai, char choice);
 void outputStudentai(const std::deque<studentas> &studentai, char choice);
 
-// Sorting functions
-void sortStudentai(std::vector<studentas> &studentai, char sortChoice);
-void sortStudentai(std::list<studentas> &studentai, char sortChoice);
-void sortStudentai(std::deque<studentas> &studentai, char sortChoice);
-splitResultVector splitStudentai(const std::vector<studentas> &studentai);
-splitResultList splitStudentai(const std::list<studentas> &studentai);
-splitResultDeque splitStudentai(const std::deque<studentas> &studentai);
-
 // Testing functions
 void testGenerateStudentai(int n);
 void testData(int n);
+void testContainers(int n);
 
 // Utility functions
 bool isAllLetters(const std::string &input);
