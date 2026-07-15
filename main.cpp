@@ -22,6 +22,71 @@ void runProgram()
                 return;
             case '1':
                 studentai = enterStudentai<Container>();
+                calculateGalutinis(studentai, namuDarbaiSvertis, egzaminasSvertis);
+                sortChoice = askSortBy();
+                sortStudentai(studentai, sortChoice);
+                result = splitStudentai(studentai);
+                outputChoice = askOutputChoice();
+                outputStudentai(result.kietiakai, outputChoice);
+                outputStudentai(result.vargsiukai, outputChoice);
+                break;
+            case '2':
+                studentai = generateOnlyPazymiai<Container>(enterNumberOfStudents());
+                calculateGalutinis(studentai, namuDarbaiSvertis, egzaminasSvertis);
+                sortChoice = askSortBy();
+                sortStudentai(studentai, sortChoice);
+                result = splitStudentai(studentai);
+                outputChoice = askOutputChoice();
+                outputStudentai(result.kietiakai, outputChoice);
+                outputStudentai(result.vargsiukai, outputChoice);
+                break;
+            case '3':
+                studentai = generateStudentai<Container>(enterNumberOfStudents());
+                calculateGalutinis(studentai, namuDarbaiSvertis, egzaminasSvertis);
+                sortChoice = askSortBy();
+                sortStudentai(studentai, sortChoice);
+                result = splitStudentai(studentai);
+                outputChoice = askOutputChoice();
+                outputStudentai(result.kietiakai, outputChoice);
+                outputStudentai(result.vargsiukai, outputChoice);
+                break;
+            case '4':
+                studentai = readStudentaiFromFile<Container>(enterFileName());
+                calculateGalutinis(studentai, namuDarbaiSvertis, egzaminasSvertis);
+                sortChoice = askSortBy();
+                sortStudentai(studentai, sortChoice);
+                result = splitStudentai(studentai);
+                outputChoice = askOutputChoice();
+                outputStudentai(result.kietiakai, outputChoice);
+                outputStudentai(result.vargsiukai, outputChoice);
+                break;
+            case '5':
+                studentai = generateStudentai<Container>(enterNumberOfStudents());
+                writeStudentaiListToFile(studentai, enterOutputFileName());
+                break;
+            case '6':
+                testGenerateStudentai(1000);
+                testGenerateStudentai(10000);
+                testGenerateStudentai(100000);
+                testGenerateStudentai(1000000);
+                testGenerateStudentai(10000000);
+                break;
+            case '7':
+                testData(1000);
+                testData(10000);
+                testData(100000);
+                testData(1000000);
+                testData(10000000);
+                break;
+            case '8':
+                testContainers(1000);
+                testContainers(10000);
+                testContainers(100000);
+                testContainers(1000000);
+                testContainers(10000000);
+                break;
+            default:
+                std::cout << "Neteisingas pasirinkimas. Bandykite dar kartą.\n";
                 break;
         }
     }
@@ -32,90 +97,23 @@ int main()
     SetConsoleOutputCP(65001);
     SetConsoleCP(65001);
     printWelcome();
-    bool menuLoop = true;
-    char choice {};
-    char sortChoice {};
-    char outputChoice {};
-    char containerChoice {};
-    std::vector<studentas> studentaiVector {};
-    splitResult<std::vector<studentas>> resultVector {};
+
     try
     {
-        while(menuLoop)
+        switch (askContainerChoice())
         {
-            choice = askMenuChoice();
-            switch (choice)
-            {
-                case '0':
-                    std::cout << "Programa baigta.\n";
-                    menuLoop = false;
-                    break;
-                case '1':
-                    studentaiVector = enterStudentai<std::vector<studentas>>();
-                    calculateGalutinis(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
-                    sortChoice = askSortBy();
-                    sortStudentai(studentaiVector, sortChoice);
-                    resultVector = splitStudentai(studentaiVector);
-                    outputChoice = askOutputChoice();
-                    outputStudentai(resultVector.kietiakai, outputChoice);
-                    outputStudentai(resultVector.vargsiukai, outputChoice);
-                    break;
-                case '2':
-                    studentaiVector = generateOnlyPazymiai(enterNumberOfStudents());
-                    calculateGalutinis(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
-                    sortChoice = askSortBy();
-                    sortStudentai(studentaiVector, sortChoice);
-                    resultVector = splitStudentai(studentaiVector);
-                    outputChoice = askOutputChoice();
-                    outputStudentai(resultVector.kietiakai, outputChoice);
-                    outputStudentai(resultVector.vargsiukai, outputChoice);
-                    break;
-                case '3':
-                    studentaiVector = generateStudentai(enterNumberOfStudents());
-                    calculateGalutinis(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
-                    sortChoice = askSortBy();
-                    sortStudentai(studentaiVector, sortChoice);
-                    resultVector = splitStudentai(studentaiVector);
-                    outputChoice = askOutputChoice();
-                    outputStudentai(resultVector.kietiakai, outputChoice);
-                    outputStudentai(resultVector.vargsiukai, outputChoice);
-                    break;
-                case '4':
-                    studentaiVector = readStudentaiFromFile<std::vector<studentas>>(enterFileName());
-                    calculateGalutinis(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
-                    sortChoice = askSortBy();
-                    sortStudentai(studentaiVector, sortChoice);
-                    resultVector = splitStudentai(studentaiVector);
-                    outputChoice = askOutputChoice();
-                    outputStudentai(resultVector.kietiakai, outputChoice);
-                    outputStudentai(resultVector.vargsiukai, outputChoice);
-                    break;
-                case '5':
-                    studentaiVector = generateStudentai(enterNumberOfStudents());
-                    writeStudentaiListToFile(studentaiVector, enterOutputFileName());
-                    break;
-                case '6':
-                    testGenerateStudentai(1000);
-                    testGenerateStudentai(10000);
-                    testGenerateStudentai(100000);
-                    testGenerateStudentai(1000000);
-                    testGenerateStudentai(10000000);
-                    break;
-                case '7':
-                    testData(1000);
-                    testData(10000);
-                    testData(100000);
-                    testData(1000000);
-                    testData(10000000);
-                    break;
-                case '8':
-                    testContainers(1000);
-                    testContainers(10000);
-                    testContainers(100000);
-                    testContainers(1000000);
-                    testContainers(10000000);
-                    break;
-            }
+            case '1':
+                runProgram<std::vector<studentas>>();
+                break;
+            case '2':
+                runProgram<std::list<studentas>>();
+                break;
+            case '3':
+                runProgram<std::deque<studentas>>();
+                break;
+            default:
+                std::cout << "Neteisingas pasirinkimas. Programa baigta.\n";
+                return 1;
         }
     }
     catch(const std::exception& e)
