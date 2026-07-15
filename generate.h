@@ -14,7 +14,6 @@ template<typename Container>
 Container generateStudentai(int n)
 {
     Container studentai;
-    studentai.reserve(n);
     for (int i = 0; i < n; i++)
     {
         studentas s;
@@ -36,7 +35,6 @@ template<typename Container>
 Container generateOnlyPazymiai(int n)
 {
     Container studentai;
-    studentai.reserve(n);
     studentas s;
     for (int i = 0; i < n; i++)
     {

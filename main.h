@@ -68,13 +68,8 @@ double calculateGalutinisAverage(const studentas &s, double namuDarbaiSvertis, d
 // File handling functions
 std::string enterFileName();
 std::string enterOutputFileName();
-void writeStudentaiToFile(const std::vector<studentas> &studentai, const std::string &filename);
-void writeStudentaiListToFile(const std::vector<studentas> &studentai, const std::string &filename);
-void outputStudentai(const std::vector<studentas> &studentai, char choice);
 
-// Testing functions
-void testGenerateStudentai(int n);
-void testData(int n);
+// Test functions
 void testContainers(int n);
 
 // Utility functions

@@ -2,6 +2,9 @@
 #include "calculate.h"
 #include "file.h"
 #include "enter.h"
+#include "generate.h"
+#include "output.h"
+#include "test.h"
 
 template<typename Container>
 void runProgram()
@@ -22,61 +25,61 @@ void runProgram()
                 return;
             case '1':
                 studentai = enterStudentai<Container>();
-                calculateGalutinis(studentai, namuDarbaiSvertis, egzaminasSvertis);
+                calculateGalutinis<Container>(studentai, namuDarbaiSvertis, egzaminasSvertis);
                 sortChoice = askSortBy();
-                sortStudentai(studentai, sortChoice);
+                sortStudentai<Container>(studentai, sortChoice);
                 result = splitStudentai(studentai);
                 outputChoice = askOutputChoice();
-                outputStudentai(result.kietiakai, outputChoice);
-                outputStudentai(result.vargsiukai, outputChoice);
+                outputStudentai<Container>(result.kietiakai, outputChoice);
+                outputStudentai<Container>(result.vargsiukai, outputChoice);
                 break;
             case '2':
                 studentai = generateOnlyPazymiai<Container>(enterNumberOfStudents());
-                calculateGalutinis(studentai, namuDarbaiSvertis, egzaminasSvertis);
+                calculateGalutinis<Container>(studentai, namuDarbaiSvertis, egzaminasSvertis);
                 sortChoice = askSortBy();
-                sortStudentai(studentai, sortChoice);
-                result = splitStudentai(studentai);
+                sortStudentai<Container>(studentai, sortChoice);
+                result = splitStudentai<Container>(studentai);
                 outputChoice = askOutputChoice();
-                outputStudentai(result.kietiakai, outputChoice);
-                outputStudentai(result.vargsiukai, outputChoice);
+                outputStudentai<Container>(result.kietiakai, outputChoice);
+                outputStudentai<Container>(result.vargsiukai, outputChoice);
                 break;
             case '3':
                 studentai = generateStudentai<Container>(enterNumberOfStudents());
-                calculateGalutinis(studentai, namuDarbaiSvertis, egzaminasSvertis);
+                calculateGalutinis<Container>(studentai, namuDarbaiSvertis, egzaminasSvertis);
                 sortChoice = askSortBy();
-                sortStudentai(studentai, sortChoice);
-                result = splitStudentai(studentai);
+                sortStudentai<Container>(studentai, sortChoice);
+                result = splitStudentai<Container>(studentai);
                 outputChoice = askOutputChoice();
-                outputStudentai(result.kietiakai, outputChoice);
-                outputStudentai(result.vargsiukai, outputChoice);
+                outputStudentai<Container>(result.kietiakai, outputChoice);
+                outputStudentai<Container>(result.vargsiukai, outputChoice);
                 break;
             case '4':
                 studentai = readStudentaiFromFile<Container>(enterFileName());
-                calculateGalutinis(studentai, namuDarbaiSvertis, egzaminasSvertis);
+                calculateGalutinis<Container>(studentai, namuDarbaiSvertis, egzaminasSvertis);
                 sortChoice = askSortBy();
-                sortStudentai(studentai, sortChoice);
-                result = splitStudentai(studentai);
+                sortStudentai<Container>(studentai, sortChoice);
+                result = splitStudentai<Container>(studentai);
                 outputChoice = askOutputChoice();
-                outputStudentai(result.kietiakai, outputChoice);
-                outputStudentai(result.vargsiukai, outputChoice);
+                outputStudentai<Container>(result.kietiakai, outputChoice);
+                outputStudentai<Container>(result.vargsiukai, outputChoice);
                 break;
             case '5':
                 studentai = generateStudentai<Container>(enterNumberOfStudents());
-                writeStudentaiListToFile(studentai, enterOutputFileName());
+                writeStudentaiListToFile<Container>(studentai, enterOutputFileName());
                 break;
             case '6':
-                testGenerateStudentai(1000);
-                testGenerateStudentai(10000);
-                testGenerateStudentai(100000);
-                testGenerateStudentai(1000000);
-                testGenerateStudentai(10000000);
+                testGenerateStudentai<Container>(1000);
+                testGenerateStudentai<Container>(10000);
+                testGenerateStudentai<Container>(100000);
+                testGenerateStudentai<Container>(1000000);
+                testGenerateStudentai<Container>(10000000);
                 break;
             case '7':
-                testData(1000);
-                testData(10000);
-                testData(100000);
-                testData(1000000);
-                testData(10000000);
+                testData<Container>(1000);
+                testData<Container>(10000);
+                testData<Container>(100000);
+                testData<Container>(1000000);
+                testData<Container>(10000000);
                 break;
             case '8':
                 testContainers(1000);
