@@ -61,7 +61,7 @@ void testContainers(int n)
 void testGenerateStudentai(int n)
 {
     std::vector<studentas> studentai {};
-    studentai = generateStudentaiVector(n);
+    studentai = generateStudentai(n);
     auto start = std::chrono::high_resolution_clock::now();
     writeStudentaiListToFile(studentai, "teststudentai" + std::to_string(n) + ".txt");
     studentai.clear();

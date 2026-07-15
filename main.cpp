@@ -26,7 +26,7 @@ int main()
                     menuLoop = false;
                     break;
                 case '1':
-                    studentaiVector = enterStudentaiVector();
+                    studentaiVector = enterStudentai();
                     calculateGalutinis(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
                     sortChoice = askSortBy();
                     sortStudentai(studentaiVector, sortChoice);
@@ -37,7 +37,7 @@ int main()
                     break;
                 case '2':
                     n = enterNumberOfStudents();
-                    studentaiVector = generateOnlyPazymiaiVector(n);
+                    studentaiVector = generateOnlyPazymiai(n);
                     calculateGalutinis(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
                     sortChoice = askSortBy();
                     sortStudentai(studentaiVector, sortChoice);
@@ -48,7 +48,7 @@ int main()
                     break;
                 case '3':
                     n = enterNumberOfStudents();
-                    studentaiVector = generateStudentaiVector(n);
+                    studentaiVector = generateStudentai(n);
                     calculateGalutinis(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
                     sortChoice = askSortBy();
                     sortStudentai(studentaiVector, sortChoice);
@@ -68,7 +68,7 @@ int main()
                     outputStudentai(resultVector.vargsiukai, outputChoice);
                     break;
                 case '5':
-                    studentaiVector = generateStudentaiVector(enterNumberOfStudents());
+                    studentaiVector = generateStudentai(enterNumberOfStudents());
                     writeStudentaiListToFile(studentaiVector, enterOutputFileName());
                     break;
                 case '6':
