@@ -40,14 +40,11 @@ const double egzaminasSvertis{0.6};
 char askMenuChoice();
 
 // Generate functions
-std::vector<studentas> generateStudentai(int n);
-std::vector<studentas> generateOnlyPazymiai(int n);
 std::vector<int> generatePazymiai(int m);
 
 // Print functions
 void printWelcome();
 void printNameAsk();
-void printStudentai(const std::vector<studentas> &studentai);
 
 // User input functions
 int enterNumberOfStudents();
