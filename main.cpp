@@ -13,13 +13,7 @@ int main()
     char sortChoice {};
     char outputChoice {};
     std::vector<studentas> studentaiVector {};
-    std::list<studentas> studentaiList {};
-    std::deque<studentas> studentaiDeque {};
     splitResult<std::vector<studentas>> resultVector {};
-    splitResult<std::list<studentas>> resultList {};
-    splitResult<std::deque<studentas>> resultDeque {};
-    std::string inputFileName {};
-    std::string outputFileName {};
     try
     {
         while(menuLoop)
@@ -64,8 +58,7 @@ int main()
                     outputStudentai(resultVector.vargsiukai, outputChoice);
                     break;
                 case '4':
-                    inputFileName = enterFileName();
-                    studentaiVector = readStudentaiFromFile<std::vector<studentas>>(inputFileName);
+                    studentaiVector = readStudentaiFromFile<std::vector<studentas>>(enterFileName());
                     calculateGalutinis(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
                     sortChoice = askSortBy();
                     sortStudentai(studentaiVector, sortChoice);
@@ -91,6 +84,13 @@ int main()
                     testData(100000);
                     testData(1000000);
                     testData(10000000);
+                    break;
+                case '8':
+                    testContainers(1000);
+                    testContainers(10000);
+                    testContainers(100000);
+                    testContainers(1000000);
+                    testContainers(10000000);
                     break;
             }
         }

@@ -5,7 +5,7 @@ void outputStudentai(const std::vector<studentas> &studentai, char choice)
     switch (choice)
     {
         case '1':
-            printStudentaiVector(studentai);
+            printStudentai(studentai);
             break;
         case '2':
             {

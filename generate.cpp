@@ -6,7 +6,7 @@ std::mt19937& getRng()
     return rng;
 }
 
-std::vector<studentas> generateStudentaiVector(int n)
+std::vector<studentas> generateStudentai(int n)
 {
     std::vector<studentas> studentai;
     studentai.reserve(n);
@@ -23,7 +23,7 @@ std::vector<studentas> generateStudentaiVector(int n)
     return studentai;
 }
 
-std::vector<studentas> generateOnlyPazymiaiVector(int n)
+std::vector<studentas> generateOnlyPazymiai(int n)
 {
     std::vector<studentas> studentai;
     studentai.reserve(n);

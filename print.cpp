@@ -12,7 +12,7 @@ void printNameAsk()
     std::cout << "Įveskite naujus studentus.\n";
 }
 
-void printStudentaiVector(const std::vector<studentas> &studentai)
+void printStudentai(const std::vector<studentas> &studentai)
 {
     if (studentai.empty())
         throw std::runtime_error("Studentų sąrašas tuščias — nėra ko spausdinti.");

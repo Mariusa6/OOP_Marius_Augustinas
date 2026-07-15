@@ -1,6 +1,6 @@
 #include "enter.h"
 
-std::vector<studentas> enterStudentaiVector() {
+std::vector<studentas> enterStudentai() {
     std::vector<studentas> tmp;
     int n{1};
     do

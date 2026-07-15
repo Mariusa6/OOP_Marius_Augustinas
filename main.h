@@ -40,20 +40,18 @@ const double egzaminasSvertis{0.6};
 char askMenuChoice();
 
 // Generate functions
-std::vector<studentas> generateStudentaiVector(int n);
-std::vector<studentas> generateOnlyPazymiaiVector(int n);
+std::vector<studentas> generateStudentai(int n);
+std::vector<studentas> generateOnlyPazymiai(int n);
 std::vector<int> generatePazymiai(int m);
 
 // Print functions
 void printWelcome();
 void printNameAsk();
-void printStudentaiVector(const std::vector<studentas> &studentai);
+void printStudentai(const std::vector<studentas> &studentai);
 
 // User input functions
 int enterNumberOfStudents();
-std::vector<studentas> enterStudentaiVector();
-std::list<studentas> enterStudentaiList();
-std::deque<studentas> enterStudentaiDeque();
+std::vector<studentas> enterStudentai();
 bool askIfMoreStudents();
 studentas enterStudentas(int n);
 std::string enterName(int n);
@@ -74,14 +72,8 @@ double calculateGalutinisAverage(const studentas &s, double namuDarbaiSvertis, d
 std::string enterFileName();
 std::string enterOutputFileName();
 void writeStudentaiToFile(const std::vector<studentas> &studentai, const std::string &filename);
-void writeStudentaiToFile(const std::list<studentas> &studentai, const std::string &filename);
-void writeStudentaiToFile(const std::deque<studentas> &studentai, const std::string &filename);
 void writeStudentaiListToFile(const std::vector<studentas> &studentai, const std::string &filename);
-void writeStudentaiListToFile(const std::list<studentas> &studentai, const std::string &filename);
-void writeStudentaiListToFile(const std::deque<studentas> &studentai, const std::string &filename);
 void outputStudentai(const std::vector<studentas> &studentai, char choice);
-void outputStudentai(const std::list<studentas> &studentai, char choice);
-void outputStudentai(const std::deque<studentas> &studentai, char choice);
 
 // Testing functions
 void testGenerateStudentai(int n);
