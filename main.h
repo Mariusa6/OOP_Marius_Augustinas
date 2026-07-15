@@ -72,9 +72,6 @@ double calculateGalutinisAverage(const studentas &s, double namuDarbaiSvertis, d
 
 // File handling functions
 std::string enterFileName();
-std::vector<studentas> readStudentaiFromFileVector(const std::string &filename);
-std::list<studentas> readStudentaiFromFileList(const std::string &filename);
-std::deque<studentas> readStudentaiFromFileDeque(const std::string &filename);
 std::string enterOutputFileName();
 void writeStudentaiToFile(const std::vector<studentas> &studentai, const std::string &filename);
 void writeStudentaiToFile(const std::list<studentas> &studentai, const std::string &filename);

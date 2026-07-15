@@ -1,5 +1,6 @@
 #include "main.h"
 #include "calculate.h"
+#include "file.h"
 
 int main()
 {
@@ -64,7 +65,7 @@ int main()
                     break;
                 case '4':
                     inputFileName = enterFileName();
-                    studentaiVector = readStudentaiFromFileVector(inputFileName);
+                    studentaiVector = readStudentaiFromFile<std::vector<studentas>>(inputFileName);
                     calculateGalutinis(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
                     sortChoice = askSortBy();
                     sortStudentai(studentaiVector, sortChoice);

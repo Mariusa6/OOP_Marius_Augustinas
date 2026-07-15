@@ -13,62 +13,6 @@ std::string enterFileName()
     return tmp;
 }
 
-
-std::vector<studentas> readStudentaiFromFileVector(const std::string &filename)
-{
-    std::vector<studentas> studentai;
-    std::ifstream file(filename);
-
-    if (!file.is_open())
-        throw std::runtime_error("Nepavyko atidaryti failo: " + filename);
-
-    std::string line;
-
-    if (!std::getline(file, line))
-        throw std::runtime_error("Failas tuščias arba sugadintas: " + filename);
-
-    std::istringstream headerStream(line);
-    std::string token;
-    int ndCount = 0;
-    while (headerStream >> token)
-    {
-        if (token.find("ND") != std::string::npos)
-            ndCount++;
-    }
-
-    int lineNumber = 1;
-    while (std::getline(file, line))
-    {
-        lineNumber++;
-        if (line.empty()) continue;
-
-        std::istringstream ss(line);
-        studentas s;
-
-        if (!(ss >> s.vardas >> s.pavarde))
-            throw std::runtime_error("Eilutėje " + std::to_string(lineNumber) + " trūksta vardo arba pavardės.");
-
-        for (int i = 0; i < ndCount; i++)
-        {
-            int nd;
-            if (!(ss >> nd))
-                throw std::runtime_error("Eilutėje " + std::to_string(lineNumber) + " trūksta namų darbo pažymio.");
-            if (nd < minPazymys || nd > maxPazymys)
-                throw std::runtime_error("Eilutėje " + std::to_string(lineNumber) + " pažymys už ribų (" + std::to_string(minPazymys) + "-" + std::to_string(maxPazymys) + "): " + std::to_string(nd));
-            s.namuDarbai.push_back(nd);
-        }
-
-        if (!(ss >> s.egzaminas))
-            throw std::runtime_error("Eilutėje " + std::to_string(lineNumber) + " trūksta egzamino pažymio.");
-        if (s.egzaminas < minPazymys || s.egzaminas > maxPazymys)
-            throw std::runtime_error("Eilutėje " + std::to_string(lineNumber) + " egzamino pažymys už ribų (" + std::to_string(minPazymys) + "-" + std::to_string(maxPazymys) + "): " + std::to_string(s.egzaminas));
-
-        studentai.push_back(s);
-    }
-    file.close();
-    return studentai;
-}
-
 std::string enterOutputFileName()
 {
     std::string tmp;

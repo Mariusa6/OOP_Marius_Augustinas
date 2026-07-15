@@ -1,5 +1,6 @@
 #include "test.h"
 #include "calculate.h"
+#include "file.h"
 
 void testGenerateStudentai(int n)
 {
@@ -23,7 +24,7 @@ void testData(int n)
 
     auto start = std::chrono::high_resolution_clock::now();
 
-    studentai = readStudentaiFromFileVector("data/studentai" + std::to_string(n) + ".txt");
+    studentai = readStudentaiFromFile<std::vector<studentas>>("data/studentai" + std::to_string(n) + ".txt");
     
     auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = end - start;
