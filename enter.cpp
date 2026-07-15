@@ -1,17 +1,5 @@
 #include "enter.h"
 
-std::vector<studentas> enterStudentai() {
-    std::vector<studentas> tmp;
-    int n{1};
-    do
-    {
-        tmp.push_back(enterStudentas(n));
-        n++;
-    } while (askIfMoreStudents());
-    
-    return tmp;
-}
-
 studentas enterStudentas(int n)
 {
     studentas ivedamas;

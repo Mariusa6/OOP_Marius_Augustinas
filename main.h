@@ -51,7 +51,6 @@ void printStudentai(const std::vector<studentas> &studentai);
 
 // User input functions
 int enterNumberOfStudents();
-std::vector<studentas> enterStudentai();
 bool askIfMoreStudents();
 studentas enterStudentas(int n);
 std::string enterName(int n);

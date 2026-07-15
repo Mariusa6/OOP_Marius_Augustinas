@@ -1,13 +1,37 @@
 #include "main.h"
 #include "calculate.h"
 #include "file.h"
+#include "enter.h"
+
+template<typename Container>
+void runProgram()
+{
+    char choice {};
+    char sortChoice {};
+    char outputChoice {};
+    Container studentai {};
+    splitResult<Container> result {};
+
+    while(true)
+    {
+        choice = askMenuChoice();
+        switch (choice)
+        {
+            case '0':
+                std::cout << "Programa baigta.\n";
+                return;
+            case '1':
+                studentai = enterStudentai<Container>();
+                break;
+        }
+    }
+}
 
 int main()
 {
     SetConsoleOutputCP(65001);
     SetConsoleCP(65001);
     printWelcome();
-    int n {};
     bool menuLoop = true;
     char choice {};
     char sortChoice {};
@@ -17,17 +41,6 @@ int main()
     splitResult<std::vector<studentas>> resultVector {};
     try
     {
-        containerChoice = askContainerChoice();
-
-        if (containerChoice == '1')
-            std::vector<studentas> studentai {};
-
-        else if (containerChoice == '2')
-            std::list<studentas> studentai {};
-
-        else
-            std::deque<studentas> studentai {};
-            
         while(menuLoop)
         {
             choice = askMenuChoice();
@@ -38,7 +51,7 @@ int main()
                     menuLoop = false;
                     break;
                 case '1':
-                    studentaiVector = enterStudentai();
+                    studentaiVector = enterStudentai<std::vector<studentas>>();
                     calculateGalutinis(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
                     sortChoice = askSortBy();
                     sortStudentai(studentaiVector, sortChoice);
@@ -48,8 +61,7 @@ int main()
                     outputStudentai(resultVector.vargsiukai, outputChoice);
                     break;
                 case '2':
-                    n = enterNumberOfStudents();
-                    studentaiVector = generateOnlyPazymiai(n);
+                    studentaiVector = generateOnlyPazymiai(enterNumberOfStudents());
                     calculateGalutinis(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
                     sortChoice = askSortBy();
                     sortStudentai(studentaiVector, sortChoice);
@@ -59,8 +71,7 @@ int main()
                     outputStudentai(resultVector.vargsiukai, outputChoice);
                     break;
                 case '3':
-                    n = enterNumberOfStudents();
-                    studentaiVector = generateStudentai(n);
+                    studentaiVector = generateStudentai(enterNumberOfStudents());
                     calculateGalutinis(studentaiVector, namuDarbaiSvertis, egzaminasSvertis);
                     sortChoice = askSortBy();
                     sortStudentai(studentaiVector, sortChoice);

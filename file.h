@@ -90,4 +90,65 @@ Container readStudentaiFromFile(const std::string &filename)
     return studentai;
 }
 
+// -------------------------------------------------------
+// Template: writeStudentaiToFile
+// Išveda studentus į .txt failą su antrašte.
+// -------------------------------------------------------
+template<typename Container>
+void writeStudentaiToFile(const Container &studentai, const std::string &filename)
+{
+    std::ofstream file(filename);
+    if (!file.is_open())
+        throw std::runtime_error("Nepavyko sukurti failo: " + filename);
+
+    file << "Vardas              Pavardė             Galutinis (Vid.)    Galutinis (Med.)\n";
+    file << "----------------------------------------------------------------------------\n";
+
+    for (const auto &s : studentai)
+    {
+        file << std::left << std::setw(20) << s.vardas 
+             << std::left << std::setw(20) << s.pavarde 
+             << std::left << std::setw(20) << s.galutinisVid 
+             << std::left << std::setw(20) << s.galutinisMed << "\n";
+    }
+
+    file.close();
+}
+
+// -------------------------------------------------------
+// Template: writeStudentaiListToFile
+// Išveda studentus į .txt failą su antrašte ir namų darbų stulpeliais.
+// -------------------------------------------------------
+template<typename Container>
+void writeStudentaiListToFile(const Container &studentai, const std::string &filename)
+{
+    std::ofstream file(filename);
+    if (!file.is_open())
+        throw std::runtime_error("Nepavyko sukurti failo: " + filename);
+
+    file << std::left << std::setw(25) << "Vardas" 
+         << std::left << std::setw(25) << "Pavardė";
+
+    for (int i = 1; i <= NUMBER_OF_PAZYMYS; ++i)
+    {
+        file << std::right << std::setw(10) << ("ND" + std::to_string(i));
+    }
+
+    file << std::right << std::setw(10) << "Egzaminas" << "\n";
+
+    for (const auto &s : studentai)
+    {
+        file << std::left << std::setw(25) << s.vardas 
+             << std::left << std::setw(25) << s.pavarde;
+
+        for (const auto &nd : s.namuDarbai)
+        {
+            file << std::right << std::setw(10) << nd;
+        }
+
+        file << std::right << std::setw(10) << s.egzaminas << "\n";
+    }
+    file.close();
+}
+
 #endif // FILE_H_DEFINED
