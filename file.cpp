@@ -13,10 +13,10 @@ std::string enterFileName()
     return tmp;
 }
 
-std::string enterOutputFileName()
+std::string enterOutputFileName(std::string desc)
 {
     std::string tmp;
-    std::cout << "Įveskite išvesties failo pavadinimą (su .txt plėtiniu): ";
+    std::cout << "Įveskite " << desc << " failo pavadinimą (su .txt plėtiniu): ";
     while (!(std::cin >> tmp) || tmp.size() < 5 || tmp.substr(tmp.size() - 4) != ".txt")
     {
         std::cin.clear();

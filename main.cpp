@@ -30,8 +30,8 @@ void runProgram()
                 sortStudentai<Container>(studentai, sortChoice);
                 result = splitStudentai(studentai);
                 outputChoice = askOutputChoice();
-                outputStudentai<Container>(result.kietiakai, outputChoice);
-                outputStudentai<Container>(result.vargsiukai, outputChoice);
+                outputStudentai<Container>(result.kietiakai, outputChoice, "kietiakai");
+                outputStudentai<Container>(result.vargsiukai, outputChoice, "vargsiukai");
                 break;
             case '2':
                 studentai = generateOnlyPazymiai<Container>(enterNumberOfStudents());
@@ -40,8 +40,8 @@ void runProgram()
                 sortStudentai<Container>(studentai, sortChoice);
                 result = splitStudentai<Container>(studentai);
                 outputChoice = askOutputChoice();
-                outputStudentai<Container>(result.kietiakai, outputChoice);
-                outputStudentai<Container>(result.vargsiukai, outputChoice);
+                outputStudentai<Container>(result.kietiakai, outputChoice, "kietiakai");
+                outputStudentai<Container>(result.vargsiukai, outputChoice, "vargsiukai");
                 break;
             case '3':
                 studentai = generateStudentai<Container>(enterNumberOfStudents());
@@ -50,8 +50,8 @@ void runProgram()
                 sortStudentai<Container>(studentai, sortChoice);
                 result = splitStudentai<Container>(studentai);
                 outputChoice = askOutputChoice();
-                outputStudentai<Container>(result.kietiakai, outputChoice);
-                outputStudentai<Container>(result.vargsiukai, outputChoice);
+                outputStudentai<Container>(result.kietiakai, outputChoice, "kietiakai");
+                outputStudentai<Container>(result.vargsiukai, outputChoice, "vargsiukai");
                 break;
             case '4':
                 studentai = readStudentaiFromFile<Container>(enterFileName());
@@ -60,8 +60,8 @@ void runProgram()
                 sortStudentai<Container>(studentai, sortChoice);
                 result = splitStudentai<Container>(studentai);
                 outputChoice = askOutputChoice();
-                outputStudentai<Container>(result.kietiakai, outputChoice);
-                outputStudentai<Container>(result.vargsiukai, outputChoice);
+                outputStudentai<Container>(result.kietiakai, outputChoice, "kietiakai");
+                outputStudentai<Container>(result.vargsiukai, outputChoice, "vargsiukai");
                 break;
             case '5':
                 studentai = generateStudentai<Container>(enterNumberOfStudents());

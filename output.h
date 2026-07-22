@@ -11,7 +11,7 @@
 // Išveda studentus į konsolę arba į failą, priklausomai nuo vartotojo pasirinkimo.
 // -------------------------------------------------------
 template<typename Container>
-void outputStudentai(const Container &studentai, char choice)
+void outputStudentai(const Container &studentai, char choice, std::string desc =  "išvesties")
 {
     switch (choice)
     {
@@ -20,7 +20,7 @@ void outputStudentai(const Container &studentai, char choice)
             break;
         case '2':
             {
-                std::string outputFileName = enterOutputFileName();
+                std::string outputFileName = enterOutputFileName(desc);
                 writeStudentaiToFile<Container>(studentai, outputFileName);
             }
             break;
