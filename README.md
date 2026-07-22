@@ -90,10 +90,6 @@ v1.0 — C++ programa su pilnu šablonų (templates) palaikymu visiems konteiner
 
 **Rikiavimo rezultatas** yra svarbiausias ir labiausiai išsiskiriantis: `std::list` naudoja merge sort, kuris neperkeldinėja elementų atmintyje — su 10M studentų `list` rikiavimas (~17 s) yra **beveik 4x greitesnis** nei `vector` (~64 s) ir **4x greitesnis** nei `deque` (~70 s). Tai atspindi fundamentalų skirtumą: `std::sort` su `vector`/`deque` reikalauja elementų perkėlimo (o kiekvienas `studentas` turi `vector<int> namuDarbai` viduje — tai brangi operacija), tuo tarpu `list::sort` tik perrikiuoja rodykles (pointers).
 
-**Nuskaitymo rezultatas**: `vector` su mažais dydžiais lėtesnis dėl pirmojo `push_back` į tuščią vektorių ir galimų perskirstymų (nėra `reserve`); su 1M+ `vector` tampa greičiausias dėl geresnio cache lokalumo.
-
-**Skirstymo rezultatas**: `deque` nuosekliai greičiausias — `std::partition_copy` su `back_inserter` į `deque` yra efektyvesnis nei į `vector` (mažiau perskirstymų) ir į `list` (geriau cache).
-
 ---
 
 ## Failų struktūra
