@@ -45,3 +45,5 @@
 
 # json files
 *.json
+
+.vscode/
