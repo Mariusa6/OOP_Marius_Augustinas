@@ -64,12 +64,33 @@ splitResult<Container> splitStudentai(const Container &studentai)
     splitResult<Container> result;
 
     std::partition_copy(studentai.begin(), studentai.end(),
-        std::back_inserter(result.kietiakai), std::back_inserter(result.vargsiukai),
-        [](const studentas &s) {
-            return s.galutinisMed >= 5.0;
-        });
+                        std::back_inserter(result.kietiakai),
+                        std::back_inserter(result.vargsiukai),
+                        [](const studentas &s) { return s.galutinisVid >= 5.0; });
 
     return result;
+}
+
+// -------------------------------------------------------
+// Template: partitionStudentai
+// Veikia su bet kokiu konteineriu (vector, list, deque).
+// -------------------------------------------------------
+
+template<typename Container>
+Container partitionStudentai(Container &studentai)
+{
+    auto it = std::stable_partition(studentai.begin(), studentai.end(),
+        [](const studentas &s) { return s.galutinisVid >= 5.0; });
+    
+    Container vargsiukai;
+
+    while (it != studentai.end())
+    {
+        vargsiukai.push_back(std::move(*it));
+        it = studentai.erase(it);
+    }
+
+    return vargsiukai;
 }
 
 #endif // CALCULATE_H_DEFINED

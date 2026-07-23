@@ -67,7 +67,7 @@ double calculateGalutinisAverage(const studentas &s, double namuDarbaiSvertis, d
 
 // File handling functions
 std::string enterFileName();
-std::string enterOutputFileName(std::string desc);
+std::string enterOutputFileName(std::string desc = "išvesties");
 
 // Test functions
 void testContainers(int n);
