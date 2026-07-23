@@ -210,7 +210,6 @@ Geriausias variantas vector ir deque atveju — erase atliekamas vienu blokiniu 
 
 ```bash
 .\programa.exe          # Windows
-./programa              # Linux/Mac
 ```
 
 ### Pirmas ekranas — konteinerio pasirinkimas
@@ -258,8 +257,10 @@ Antraštė naudojama automatiškai nustatyti namų darbų stulpelių skaičių.
 ### CMake (rekomenduojama, visos OS)
 
 ```bash
-mkdir build && cd build
-cmake ..
+mkdir build
+cd build
+
+cmake .. -G "MinGW Makefiles"
 cmake --build .
 .\programa.exe  # Windows
 ```
