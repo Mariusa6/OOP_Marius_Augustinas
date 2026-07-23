@@ -29,7 +29,7 @@ static void testContainer(const std::string &label, const std::string &filename)
     // 2. Rikiavimas
     // vector/deque: std::sort  |  list: .sort()  (sprendžiama if constexpr calculate.h)
     auto start2 = std::chrono::high_resolution_clock::now();
-    sortStudentai(studentai, '4');
+    sortStudentai(studentai, '3');  // rikiuojama pagal galutinisVid
     auto end2 = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed2 = end2 - start2;
     std::cout << "    Rikiavimas:  " << elapsed2.count() << " s\n";

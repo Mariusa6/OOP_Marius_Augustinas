@@ -40,10 +40,10 @@
 # debug information files
 *.dwo
 
-# text files
-*.txt
 
 # json files
 *.json
 
 .vscode/
+
+data/
