@@ -35,9 +35,9 @@ static void testContainer(const std::string &label, const std::string &filename)
     std::cout << "    Rikiavimas:  " << elapsed2.count() << " s\n";
  
     // 3. Skirstymas į dvi grupes
-    splitResult<Container> result;
+    Container vargsiukai;
     auto start3 = std::chrono::high_resolution_clock::now();
-    result = splitStudentai(studentai);
+    vargsiukai = partitionStudentai(studentai);
     auto end3 = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed3 = end3 - start3;
     std::cout << "    Skirstymas:  " << elapsed3.count() << " s\n";

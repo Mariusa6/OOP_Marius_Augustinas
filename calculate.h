@@ -80,15 +80,10 @@ template<typename Container>
 Container partitionStudentai(Container &studentai)
 {
     auto it = std::stable_partition(studentai.begin(), studentai.end(),
-        [](const studentas &s) { return s.galutinisVid >= 5.0; });
-    
-    Container vargsiukai;
+                                         [](const studentas &s) { return s.galutinisVid >= 5.0; });
 
-    while (it != studentai.end())
-    {
-        vargsiukai.push_back(std::move(*it));
-        it = studentai.erase(it);
-    }
+    Container vargsiukai(it, studentai.end());
+    studentai.erase(it, studentai.end());
 
     return vargsiukai;
 }

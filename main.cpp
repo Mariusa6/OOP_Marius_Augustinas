@@ -12,8 +12,7 @@ void runProgram()
     char choice {};
     char sortChoice {};
     char outputChoice {};
-    Container studentai {};
-    splitResult<Container> result {};
+    Container studentai {}, vargsiukai {};
 
     while(true)
     {
@@ -28,40 +27,40 @@ void runProgram()
                 calculateGalutinis<Container>(studentai, namuDarbaiSvertis, egzaminasSvertis);
                 sortChoice = askSortBy();
                 sortStudentai<Container>(studentai, sortChoice);
-                result = splitStudentai(studentai);
+                vargsiukai = partitionStudentai(studentai);
                 outputChoice = askOutputChoice();
-                outputStudentai<Container>(result.kietiakai, outputChoice, "kietiakai");
-                outputStudentai<Container>(result.vargsiukai, outputChoice, "vargsiukai");
+                outputStudentai<Container>(studentai, outputChoice, "kietiakai");
+                outputStudentai<Container>(vargsiukai, outputChoice, "vargsiukai");
                 break;
             case '2':
                 studentai = generateOnlyPazymiai<Container>(enterNumberOfStudents());
                 calculateGalutinis<Container>(studentai, namuDarbaiSvertis, egzaminasSvertis);
                 sortChoice = askSortBy();
                 sortStudentai<Container>(studentai, sortChoice);
-                result = splitStudentai<Container>(studentai);
+                vargsiukai = partitionStudentai(studentai);
                 outputChoice = askOutputChoice();
-                outputStudentai<Container>(result.kietiakai, outputChoice, "kietiakai");
-                outputStudentai<Container>(result.vargsiukai, outputChoice, "vargsiukai");
+                outputStudentai<Container>(studentai, outputChoice, "kietiakai");
+                outputStudentai<Container>(vargsiukai, outputChoice, "vargsiukai");
                 break;
             case '3':
                 studentai = generateStudentai<Container>(enterNumberOfStudents());
                 calculateGalutinis<Container>(studentai, namuDarbaiSvertis, egzaminasSvertis);
                 sortChoice = askSortBy();
                 sortStudentai<Container>(studentai, sortChoice);
-                result = splitStudentai<Container>(studentai);
+                vargsiukai = partitionStudentai(studentai);
                 outputChoice = askOutputChoice();
-                outputStudentai<Container>(result.kietiakai, outputChoice, "kietiakai");
-                outputStudentai<Container>(result.vargsiukai, outputChoice, "vargsiukai");
+                outputStudentai<Container>(studentai, outputChoice, "kietiakai");
+                outputStudentai<Container>(vargsiukai, outputChoice, "vargsiukai");
                 break;
             case '4':
                 studentai = readStudentaiFromFile<Container>(enterFileName());
                 calculateGalutinis<Container>(studentai, namuDarbaiSvertis, egzaminasSvertis);
                 sortChoice = askSortBy();
                 sortStudentai<Container>(studentai, sortChoice);
-                result = splitStudentai<Container>(studentai);
+                vargsiukai = partitionStudentai(studentai);
                 outputChoice = askOutputChoice();
-                outputStudentai<Container>(result.kietiakai, outputChoice, "kietiakai");
-                outputStudentai<Container>(result.vargsiukai, outputChoice, "vargsiukai");
+                outputStudentai<Container>(studentai, outputChoice, "kietiakai");
+                outputStudentai<Container>(vargsiukai, outputChoice, "vargsiukai");
                 break;
             case '5':
                 studentai = generateStudentai<Container>(enterNumberOfStudents());
